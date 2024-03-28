@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+     <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.1" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MinCQRS.BLL\MinCQRS.BLL.csproj" />
+    <ProjectReference Include="..\MinCQRS.Domain\MinCQRS.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
