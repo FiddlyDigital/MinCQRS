@@ -1,10 +1,10 @@
-﻿namespace MinCQRS.DAL.Interceptors
-{
-    using Microsoft.EntityFrameworkCore.ChangeTracking;
-    using Microsoft.EntityFrameworkCore.Diagnostics;
-    using Microsoft.EntityFrameworkCore;
-    using MinCQRS.DAL.Entities.Base;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using MinCQRS.DAL.Entities.Base;
 
+namespace MinCQRS.DAL.Interceptors
+{
     public sealed class SoftDeleteInterceptor : SaveChangesInterceptor
     {
         public override ValueTask<InterceptionResult<int>> SavingChangesAsync(

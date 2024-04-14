@@ -1,8 +1,7 @@
-﻿namespace MinCQRS.BLL.Services.Base.Interfaces
-{
-    using LanguageExt.Common;
-    using System.Collections.Generic;
+﻿using LanguageExt.Common;
 
+namespace MinCQRS.BLL.Services.Base.Interfaces
+{
     public interface ICrudService<TService, TModel>
     {
         Task<Result<ICollection<TModel>>> GetList(int pageIndex, int pageSize);

@@ -1,9 +1,9 @@
-﻿namespace MinCQRS.BLL.Mapping
-{
-    using AutoMapper;
-    using MinCQRS.DAL.Entities;
-    using MinCQRS.Domain.Models;
+﻿using AutoMapper;
+using MinCQRS.DAL.Entities;
+using MinCQRS.Domain.Models;
 
+namespace MinCQRS.BLL.Mapping
+{
     public sealed class MappingProfile : Profile
     {
         public MappingProfile()

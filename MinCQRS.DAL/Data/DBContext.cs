@@ -1,9 +1,9 @@
-﻿namespace MinCQRS.DAL.Data
-{
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Logging;
-    using MinCQRS.DAL.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using MinCQRS.DAL.Entities;
 
+namespace MinCQRS.DAL.Data
+{
     public class BaseDBContext : DbContext
     {
         private readonly ILogger<BaseDBContext> _logger;

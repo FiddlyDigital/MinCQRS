@@ -1,12 +1,10 @@
-﻿namespace MinCQRS.Application.Handlers.Base
-{
-    using LanguageExt.Common;
-    using MediatR;
-    using Microsoft.Extensions.Logging;
-    using MinCQRS.Application.Handlers.Base.Interfaces;
-    using System;
-    using System.Threading.Tasks;
+﻿using LanguageExt.Common;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using MinCQRS.Application.Handlers.Base.Interfaces;
 
+namespace MinCQRS.Application.Handlers.Base
+{
     public abstract class BaseQueryHandler<THandler, TRequestQuery, TResponse> : IRequestHandler<TRequestQuery, Result<TResponse>>
            where TRequestQuery : IQuery<Result<TResponse>>
     {

@@ -1,16 +1,12 @@
-﻿namespace MinCQRS.DAL.Data
-{
-    using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
-    using MinCQRS.DAL.Entities.Base;
-    using MinCQRS.DAL.Data.Interfaces;
-    using System.Threading;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using MinCQRS.DAL.Entities.Base;
+using MinCQRS.DAL.Data.Interfaces;
 
+namespace MinCQRS.DAL.Data
+{
     public class BaseRepository<TEntity> : IBaseRepository<TEntity>
-            where TEntity : BaseEntity
+        where TEntity : BaseEntity
     {
         protected readonly DbContext _context;
         protected readonly DbSet<TEntity> _dbSet;

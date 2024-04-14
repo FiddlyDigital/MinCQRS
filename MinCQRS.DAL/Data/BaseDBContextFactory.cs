@@ -1,10 +1,10 @@
-﻿namespace MinCQRS.DAL.Data
-{
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Design;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
+namespace MinCQRS.DAL.Data
+{
     public class BaseDBContextFactory : IDesignTimeDbContextFactory<BaseDBContext>
     {
         private readonly ILogger<BaseDBContext> logger;

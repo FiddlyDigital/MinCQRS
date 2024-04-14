@@ -1,6 +1,7 @@
-﻿namespace MinCQRS.Domain.Extensions
+﻿using AutoMapper;
+
+namespace MinCQRS.Domain.Extensions
 {
-    using AutoMapper;
 
     public static class MappingExtensions
     {

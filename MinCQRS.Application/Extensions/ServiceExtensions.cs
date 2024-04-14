@@ -5,10 +5,10 @@
     using Microsoft.Extensions.DependencyInjection;
     using MinCQRS.DAL.Data.Interfaces;
     using MinCQRS.DAL.Data;
-    using MinCQRS.Application.Handlers.SettingGroups.GetSettingGroup;
     using MinCQRS.Application.PipelineBehaviors;
     using System;
     using System.Reflection;
+    using MinCQRS.Application.Handlers.SettingGroups;
 
     public static class ServiceExtensions
     {
@@ -19,7 +19,7 @@
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
 
             // Services
-            Assembly applicationAssembly = Assembly.GetAssembly(typeof(GetSettingGroupQuery))
+            Assembly applicationAssembly = Assembly.GetAssembly(typeof(GetSettingGroupByIdQuery))
                 ?? throw new Exception("Can't register handlers and validators for Application");
 
             services.AddMediatR(cfg => {

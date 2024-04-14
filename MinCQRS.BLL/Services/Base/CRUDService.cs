@@ -1,17 +1,15 @@
-﻿namespace MinCQRS.BLL.Services.Base
-{
-    using LanguageExt.Common;
-    using Microsoft.Extensions.Logging;
-    using MinCQRS.BLL.Services.Base.Interfaces;
-    using MinCQRS.DAL.Data.Interfaces;
-    using MinCQRS.DAL.Entities.Base;
-    using MinCQRS.Domain.Exceptions;
-    using MinCQRS.Domain.Extensions;
-    using MinCQRS.Domain.Models.Base;
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
+﻿using LanguageExt.Common;
+using Microsoft.Extensions.Logging;
+using MinCQRS.BLL.Services.Base.Interfaces;
+using MinCQRS.DAL.Data.Interfaces;
+using MinCQRS.DAL.Entities.Base;
+using MinCQRS.Domain.Exceptions;
+using MinCQRS.Domain.Extensions;
+using MinCQRS.Domain.Models.Base;
+using System.Globalization;
 
+namespace MinCQRS.BLL.Services.Base
+{
     public abstract class CRUDService<TService, TModel, TEntity> : BaseService<TService>, ICrudService<TService, TModel>
         where TService : BaseService<TService>
         where TModel : BaseModel

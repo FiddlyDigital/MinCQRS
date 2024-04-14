@@ -1,7 +1,7 @@
-﻿namespace MinCQRS.BLL.Services.Base
-{
-    using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
+namespace MinCQRS.BLL.Services.Base
+{
     public abstract class BaseService<T> where T : BaseService<T>
     {
         protected readonly ILogger Logger;

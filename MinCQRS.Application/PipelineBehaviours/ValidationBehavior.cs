@@ -1,11 +1,10 @@
-﻿namespace MinCQRS.Application.PipelineBehaviors
-{
-    using FluentValidation;
-    using FluentValidation.Results;
-    using MediatR;
-    using MinCQRS.Application.PipelineBehaviours.Base;
-    using MinCQRS.Application.Handlers.Base.Interfaces;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using MediatR;
+using MinCQRS.Application.PipelineBehaviours.Base;
 
+namespace MinCQRS.Application.PipelineBehaviors
+{
     public sealed class ValidationBehavior<TRequest, TResponse> : BasePipelineBehavior<TRequest, TResponse>
         where TRequest : class, IRequest<TResponse>
         where TResponse : new()

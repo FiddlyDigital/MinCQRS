@@ -1,9 +1,8 @@
-﻿namespace MinCQRS.BLL.Extensions
-{
-    using Microsoft.Extensions.DependencyInjection;
-    using MinCQRS.BLL.Services;
-    using MinCQRS.BLL.Services.Interfaces;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MinCQRS.BLL.Services;
 
+namespace MinCQRS.BLL.Extensions
+{
     public static class ServiceExtensions
     {
         public static IServiceCollection AddBLLServices(this IServiceCollection services)

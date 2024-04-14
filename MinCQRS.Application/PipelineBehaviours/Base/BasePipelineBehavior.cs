@@ -1,11 +1,8 @@
-﻿namespace MinCQRS.Application.PipelineBehaviours.Base
-{
-    using System.Reflection;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using MediatR;
-    using MinCQRS.Application.Handlers.Base.Interfaces;
+﻿using System.Reflection;
+using MediatR;
 
+namespace MinCQRS.Application.PipelineBehaviours.Base
+{
     public abstract class BasePipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : class, IRequest<TResponse>
     {

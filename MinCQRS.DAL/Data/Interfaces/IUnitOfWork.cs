@@ -1,9 +1,8 @@
-﻿namespace MinCQRS.DAL.Data.Interfaces
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using System.Threading.Tasks;
+
+namespace MinCQRS.DAL.Data.Interfaces
 {
-    using Microsoft.EntityFrameworkCore.Storage;
-    using System.Threading.Tasks;
-
-
     public interface IUnitOfWork
     {
         //IDbContextTransaction BeginTransaction();

@@ -4,7 +4,7 @@
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
     using MinCQRS.API.Constants;
-    using MinCQRS.Application.Handlers.SettingsGroups.GetSettingGroups;
+    using MinCQRS.Application.Handlers.SettingGroups;
     using MinCQRS.Domain.Models;
 
     // Candidate for Base extraction
@@ -21,21 +21,10 @@
                 return Results.BadRequest("A");
             }
 
-            if (page > maxPage)
-            {
-                return Results.BadRequest("B");
-            } 
-
             if (pageSize < 1)
             {
                 return Results.BadRequest("C");
             }
-
-            if (pageSize > maxPageSize)
-            {
-                return Results.BadRequest("D");
-            }
-
             Result<ICollection<SettingGroupModel>> result = await mediator.Send(
                 new GetSettingGroupListQuery((page -1), pageSize)
             );

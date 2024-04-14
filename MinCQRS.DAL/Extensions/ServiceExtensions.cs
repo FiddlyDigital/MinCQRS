@@ -1,13 +1,11 @@
-﻿namespace MinCQRS.DAL.Extensions
-{
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
-    using MinCQRS.DAL.Data;
-    using MinCQRS.DAL.Interceptors;
-    using MinCQRS.DAL.Repos;
-    using MinCQRS.DAL.Repos.Interfaces;
-    using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MinCQRS.DAL.Data;
+using MinCQRS.DAL.Interceptors;
+using MinCQRS.DAL.Repos;
 
+namespace MinCQRS.DAL.Extensions
+{
     public static class ServiceExtensions
     {
         public static IServiceCollection AddDALServices(this IServiceCollection services, string connectionString)

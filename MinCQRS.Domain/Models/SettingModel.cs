@@ -1,8 +1,8 @@
-﻿namespace MinCQRS.Domain.Models
-{
-    using System.ComponentModel.DataAnnotations;
-    using MinCQRS.Domain.Models.Base;
+﻿using System.ComponentModel.DataAnnotations;
+using MinCQRS.Domain.Models.Base;
 
+namespace MinCQRS.Domain.Models
+{
     public sealed class SettingModel : BaseModel
     {
         [Required]

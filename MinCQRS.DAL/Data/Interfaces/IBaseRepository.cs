@@ -1,9 +1,7 @@
-﻿namespace MinCQRS.DAL.Data.Interfaces
-{
-    using MinCQRS.DAL.Entities.Base;
-    using System.Linq;
-    using System.Threading.Tasks;
+﻿using MinCQRS.DAL.Entities.Base;
 
+namespace MinCQRS.DAL.Data.Interfaces
+{
     public interface IBaseRepository<TEntity>
         where TEntity : BaseEntity
     {

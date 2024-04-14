@@ -3,7 +3,7 @@
     using LanguageExt.Common;
     using MediatR;
     using MinCQRS.API.Constants;
-    using MinCQRS.Application.Handlers.SettingGroups.GetSettingGroup;
+    using MinCQRS.Application.Handlers.SettingGroups;
     using MinCQRS.Domain.Models;
 
     public class GetSettingGroupByIdEndpoint : IEndpoint
@@ -30,7 +30,7 @@
 
         private static async Task<IResult> GetByIdAsync(ISender mediator, int id)
         {
-            Result<SettingGroupModel> result = await mediator.Send(new GetSettingGroupQuery(id));
+            Result<SettingGroupModel> result = await mediator.Send(new GetSettingGroupByIdQuery(id));
             return result.Match(
                 Succ: val => Results.Ok(val),
                 Fail: exception => Results.Problem(exception.Message));

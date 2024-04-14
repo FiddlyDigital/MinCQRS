@@ -1,8 +1,8 @@
-﻿namespace MinCQRS.DAL.Entities.Base
-{
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
+namespace MinCQRS.DAL.Entities.Base
+{
     public class BaseEntity : ISoftDeletable
     {
         [Key]

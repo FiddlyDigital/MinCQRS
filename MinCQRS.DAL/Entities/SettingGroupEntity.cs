@@ -1,8 +1,8 @@
-﻿namespace MinCQRS.DAL.Entities
-{
-    using MinCQRS.DAL.Entities.Base;
-    using System.ComponentModel.DataAnnotations;
+﻿using MinCQRS.DAL.Entities.Base;
+using System.ComponentModel.DataAnnotations;
 
+namespace MinCQRS.DAL.Entities
+{
     public class SettingGroupEntity : BaseEntity
     {
         [Required]
