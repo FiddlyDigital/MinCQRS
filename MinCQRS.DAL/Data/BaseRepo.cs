@@ -22,9 +22,9 @@
             _dbSet = _context.Set<TEntity>();
         }
 
-        public IQueryable<TEntity> GetAll()
+        public ICollection<TEntity> GetAll(int pageIndex = 0, int pagesize = 25)
         {
-            return _dbSet.AsQueryable();
+            return _dbSet.Skip(pageIndex * pagesize).Take(pagesize).ToList();
         }
 
         public async Task<TEntity?> GetById(int id, CancellationToken cancellationToken = default, params string[] includeProperties)

@@ -7,13 +7,14 @@
     using MinCQRS.Application.Handlers.Base.Interfaces;
 
     public sealed class ValidationBehavior<TRequest, TResponse> : BasePipelineBehavior<TRequest, TResponse>
-        where TRequest : class, ICommand<TResponse>
+        where TRequest : class, IRequest<TResponse>
         where TResponse : new()
     {
         private readonly IEnumerable<IValidator<TRequest>> validators;
 
         public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
         {
+            // Force use of Validators
             ArgumentNullException.ThrowIfNull(validators);
             this.validators = validators;
         }
@@ -29,7 +30,6 @@
 
             if (failures.Any())
             {
-                // usage
                 ValidationException errorException = new ValidationException(failures);
                 return Task.FromResult(CreateResponseObject<TResponse>(errorException));
             }

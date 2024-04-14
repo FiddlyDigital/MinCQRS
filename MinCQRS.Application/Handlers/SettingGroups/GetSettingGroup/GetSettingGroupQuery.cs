@@ -1,16 +1,10 @@
 ﻿namespace MinCQRS.Application.Handlers.SettingGroups.GetSettingGroup
 {
-    using LanguageExt.Common;
-    using MinCQRS.Application.Handlers.Base.Interfaces;
+    using MinCQRS.Application.Handlers.Base.GenericQueries;
     using MinCQRS.Domain.Models;
 
-    public sealed class GetSettingGroupQuery : IQuery<Result<SettingGroupModel>>
+    public sealed class GetSettingGroupQuery : GetByIdQuery<SettingGroupModel>
     {
-        public GetSettingGroupQuery(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; set; }
+        public GetSettingGroupQuery(int id) : base(id) { }
     }
 }

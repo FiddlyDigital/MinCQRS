@@ -17,11 +17,11 @@
             this.Logger = logger;
         }
 
-        protected abstract Task<Result<TResponse>> Act(TRequestQuery request, CancellationToken cancellationToken);
+        protected abstract Task<Result<TResponse?>> Act(TRequestQuery request, CancellationToken cancellationToken);
 
         public async Task<Result<TResponse>> Handle(TRequestQuery request, CancellationToken cancellationToken)
         {
-            Result<TResponse> result;
+            Result<TResponse?> result;
 
             try
             {

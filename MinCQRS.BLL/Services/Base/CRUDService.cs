@@ -26,11 +26,11 @@
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public async Task<Result<ICollection<TModel>>> GetAll()
+        public async Task<Result<ICollection<TModel>>> GetList(int pageIndex, int pageSize)
         {
             try
             {
-                IQueryable<TEntity> entities = _repository.GetAll();
+                ICollection<TEntity> entities = _repository.GetAll(pageIndex, pageSize);
                 ICollection<TModel> list = entities.MapTo<ICollection<TModel>>();
                 return new Result<ICollection<TModel>>(list);
             }

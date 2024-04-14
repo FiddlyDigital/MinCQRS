@@ -21,7 +21,6 @@
 
         protected async override Task<Result<SettingGroupModel>> Act(GetSettingGroupQuery request, CancellationToken cancellationToken)
         {
-            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(request.Id);
             return await settingGroupService.GetById(request.Id, cancellationToken);
         }
     }

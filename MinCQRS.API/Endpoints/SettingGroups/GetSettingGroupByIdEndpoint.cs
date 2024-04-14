@@ -30,11 +30,6 @@
 
         private static async Task<IResult> GetByIdAsync(ISender mediator, int id)
         {
-            if (id <= 0)
-            {
-                return Results.BadRequest();
-            }
-
             Result<SettingGroupModel> result = await mediator.Send(new GetSettingGroupQuery(id));
             return result.Match(
                 Succ: val => Results.Ok(val),

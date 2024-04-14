@@ -28,6 +28,13 @@
 
             // Data repositories
             services.AddScoped<ISettingGroupsRepo, SettingGroupsRepo>();
+            services.AddScoped<IMicrositeRepo, MicrositeRepo>();
+            services.AddScoped<IPageTemplateRepo, PageTemplateRepo>();
+            services.AddScoped<IPageRepo, PageRepo>();
+            services.AddScoped<IBlockTemplateRepo, BlockTemplateRepo>();
+            services.AddScoped<IBlockRepo, BlockRepo>();
+            services.AddScoped<IElementTemplateRepo, ElementTemplateRepo>();
+            services.AddScoped<IElementRepo, ElementRepo>();
 
             return services;
         }

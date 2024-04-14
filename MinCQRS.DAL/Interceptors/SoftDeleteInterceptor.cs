@@ -14,8 +14,7 @@
         {
             if (eventData.Context is null)
             {
-                return base.SavingChangesAsync(
-                    eventData, result, cancellationToken);
+                return base.SavingChangesAsync(eventData, result, cancellationToken);
             }
 
             IEnumerable<EntityEntry<ISoftDeletable>> entries = eventData.Context.ChangeTracker

@@ -24,7 +24,6 @@
 
         protected abstract Task<Result<TResponse>> Act(TRequestCommand request, CancellationToken cancellationToken);
 
-        /// <inheritdoc/>
         public async Task<Result<TResponse>> Handle(TRequestCommand request, CancellationToken cancellationToken)
         {
             Result<TResponse> result;
@@ -37,7 +36,7 @@
                 if (!result.IsSuccess)
                 {
                     Exception exc = result.Match(
-                        Succ: x => new Exception("Command did not succeed but no exception raised."), 
+                        Succ: x => new Exception("Command did not succeed but no exception raised."),
                         Fail: ex => ex
                     );
 

@@ -7,7 +7,7 @@
     using MinCQRS.Application.Handlers.Base.Interfaces;
 
     public abstract class BasePipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : class, ICommand<TResponse>
+        where TRequest : class, IRequest<TResponse>
     {
         public virtual Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
