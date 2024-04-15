@@ -1,14 +1,15 @@
-﻿namespace MinCQRS.API.Endpoints.SettingGroups
-{
-    using LanguageExt.Common;
-    using MediatR;
-    using MinCQRS.API.Constants;
-    using MinCQRS.Application.Handlers.SettingGroups;
-    using MinCQRS.Domain.Models;
+﻿using LanguageExt.Common;
+using MediatR;
+using MinCQRS.API.Constants;
+using MinCQRS.API.Endpoints.Base;
+using MinCQRS.Application.Handlers.SettingGroups;
+using MinCQRS.Domain.Models;
 
-    public class GetSettingGroupByIdEndpoint : IEndpoint
+namespace MinCQRS.API.Endpoints.SettingGroups
+{
+    public sealed class GetSettingGroupByIdEndpoint : IEndpoint
     {
-        private readonly string EndpointRoute = Routes.Endpoints.SettingGroups;
+        private readonly string EndpointRoute = Resources.Routes.SettingGroups;
 
         public void MapEndpoint(IEndpointRouteBuilder app)
         {

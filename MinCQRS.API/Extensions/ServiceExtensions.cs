@@ -4,6 +4,7 @@
     using AutoMapper;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using MinCQRS.API.Endpoints;
+    using MinCQRS.API.Endpoints.Base;
     using MinCQRS.BLL.Mapping;
     using MinCQRS.Domain.Extensions;
 
@@ -16,10 +17,11 @@
 
         public static IServiceCollection AddEndpoints(this IServiceCollection services, Assembly assembly)
         {
-            ServiceDescriptor[] serviceDescriptors = assembly
+            ServiceDescriptor[] apiEndpoints = assembly
                 .DefinedTypes
                 .Where(type => 
                     type is { 
+                        IsSealed: true,
                         IsAbstract: false, 
                         IsInterface: false 
                     } 
@@ -27,7 +29,7 @@
                 .Select(type => ServiceDescriptor.Transient(typeof(IEndpoint), type))
                 .ToArray();
 
-            services.TryAddEnumerable(serviceDescriptors);
+            services.TryAddEnumerable(apiEndpoints);
             return services;
         }
 

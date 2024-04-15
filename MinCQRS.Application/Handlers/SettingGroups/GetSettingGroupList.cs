@@ -10,6 +10,8 @@ namespace MinCQRS.Application.Handlers.SettingGroups
 {
     public sealed class GetSettingGroupListQuery : GetListQuery<SettingGroupModel>
     {
+        public GetSettingGroupListQuery() : base() { }
+
         public GetSettingGroupListQuery(int pageIndex, int pageSize) : base(pageIndex, pageSize) { }
     }
 

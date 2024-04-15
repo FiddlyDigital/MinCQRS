@@ -1,6 +1,7 @@
 ﻿namespace MinCQRS.API.Extensions
 {
     using MinCQRS.API.Endpoints;
+    using MinCQRS.API.Endpoints.Base;
     using MinCQRS.API.Endpoints.SettingGroups;
 
     public static class WebApplicationExtensions

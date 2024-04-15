@@ -5,6 +5,8 @@
 
     public abstract class GetListQuery<TModel> : IQuery<Result<ICollection<TModel>>>
     {
+        public GetListQuery() { }
+
         public GetListQuery(int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
