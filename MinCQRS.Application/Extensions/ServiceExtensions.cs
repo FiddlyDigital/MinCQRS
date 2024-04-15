@@ -1,15 +1,16 @@
-﻿namespace MinCQRS.Application.Extensions
-{
-    using FluentValidation;
-    using MediatR;
-    using Microsoft.Extensions.DependencyInjection;
-    using MinCQRS.DAL.Data.Interfaces;
-    using MinCQRS.DAL.Data;
-    using MinCQRS.Application.PipelineBehaviors;
-    using System;
-    using System.Reflection;
-    using MinCQRS.Application.Handlers.SettingGroups;
+﻿using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using MinCQRS.DAL.Data.Interfaces;
+using MinCQRS.DAL.Data;
+using MinCQRS.Application.PipelineBehaviors;
+using System;
+using System.Reflection;
+using MinCQRS.Application.Handlers.SettingGroups;
 
+
+namespace MinCQRS.Application.Extensions
+{
     public static class ServiceExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
@@ -28,8 +29,6 @@
             });
             services.AddValidatorsFromAssembly(applicationAssembly, includeInternalTypes: true);
             services.AddScoped(typeof(IUnitOfWork), typeof(EFUnitOfWork<BaseDBContext>));
-
-            
 
             return services;
         }

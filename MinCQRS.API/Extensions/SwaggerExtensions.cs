@@ -1,8 +1,8 @@
-﻿namespace MinCQRS.API.Extensions
-{
-    using Microsoft.OpenApi.Models;
-    using System.Reflection;
+﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
 
+namespace MinCQRS.API.Extensions
+{
     public static class SwaggerExtensions
     {
         public static IServiceCollection AddSwaggerStartup(this IServiceCollection services)
@@ -21,7 +21,7 @@
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
                     Scheme = "bearer",
-                    Description = "Please insert JWT token into field",
+                    Description = "Paste a valid JWT Token",
                 });
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement

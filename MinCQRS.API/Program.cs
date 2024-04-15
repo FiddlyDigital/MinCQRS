@@ -1,17 +1,18 @@
-﻿namespace MinCQRS.API
-{
-    using Asp.Versioning;
-    using Asp.Versioning.Builder;
-    using Hellang.Middleware.ProblemDetails;
-    using Hellang.Middleware.ProblemDetails.Mvc;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Options;
-    using MinCQRS.API.Extensions;
-    using MinCQRS.Application.Extensions;
-    using MinCQRS.BLL.Extensions;
-    using MinCQRS.DAL.Extensions;
+﻿using Asp.Versioning;
+using Asp.Versioning.Builder;
+using Hellang.Middleware.ProblemDetails;
+using Hellang.Middleware.ProblemDetails.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using MinCQRS.API.Extensions;
+using MinCQRS.Application.Extensions;
+using MinCQRS.BLL.Extensions;
+using MinCQRS.DAL.Extensions;
+using ProblemDetailsOptions = Hellang.Middleware.ProblemDetails.ProblemDetailsOptions;
 
+namespace MinCQRS.API
+{
     internal class Program
     {
         private static void Main(string[] args)

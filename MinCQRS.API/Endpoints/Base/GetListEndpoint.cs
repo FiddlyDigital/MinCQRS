@@ -7,7 +7,6 @@ using MinCQRS.API;
 using MinCQRS.API.Constants;
 using MinCQRS.API.Endpoints;
 using MinCQRS.API.Endpoints.Base;
-using MinCQRS.API.Endpoints.SettingGroups;
 using MinCQRS.Application.Handlers.Base.GenericQueries;
 using MinCQRS.Application.Handlers.SettingGroups;
 using MinCQRS.Domain.Models;
@@ -30,10 +29,14 @@ namespace MinCQRS.API.Endpoints.Base
         private async Task<IResult> GetListAsync(ISender mediator, int page = 1, int pageSize = 25)
         {
             if (page < 1)
+            {
                 return Results.BadRequest("A");
+            }
 
             if (pageSize < 1)
-                return Results.BadRequest("C");
+            { 
+                return Results.BadRequest("B");
+            }
 
             var getListQuery = new TQuery()
             {
@@ -55,17 +58,15 @@ namespace MinCQRS.API.Endpoints.Base
                     [FromQuery(Name = "page")] int page,
                     [FromQuery(Name = "pageSize")] int pageSize
                 ) => GetListAsync(mediator, page, pageSize))
-                .WithDisplayName("Get" + EndpointRoute + "List")
-                .WithName("Get" + EndpointRoute + "List")
                 .WithOpenApi(operation => new(operation)
                 {
-                    Summary = "Requests a list of TModel",
-                    Description = "Will return a paginated list of TModel",
+                    Summary = "Requests a list of " + EndpointRoute,
+                    Description = "Will return a paginated list of " + EndpointRoute,
                     Tags = new[]
                     {
                         new OpenApiTag()
                         {
-                            Name = "Get" + EndpointRoute + "ListEndpoint",
+                            Name = EndpointRoute,
                         }
                     }
                 })

@@ -34,7 +34,7 @@ namespace MinCQRS.Application.Handlers.Base
                 if (!result.IsSuccess)
                 {
                     Exception exc = result.Match(
-                        Succ: x => new Exception("Command did not succeed but no exception raised."),
+                        Succ: x => new Exception("Command did not succeed, but no exception raised."),
                         Fail: ex => ex
                     );
 

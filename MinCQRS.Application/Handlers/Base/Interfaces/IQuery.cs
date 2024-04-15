@@ -1,8 +1,9 @@
-﻿namespace MinCQRS.Application.Handlers.Base.Interfaces
-{
-    using MediatR;
+﻿using MediatR;
 
+namespace MinCQRS.Application.Handlers.Base.Interfaces
+{
     public interface IQuery<out TResponse> : IRequest<TResponse>
     {
+
     }
 }

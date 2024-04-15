@@ -1,13 +1,13 @@
-﻿namespace MinCQRS.API.Extensions
-{
-    using System.Reflection;
-    using AutoMapper;
-    using Microsoft.Extensions.DependencyInjection.Extensions;
-    using MinCQRS.API.Endpoints;
-    using MinCQRS.API.Endpoints.Base;
-    using MinCQRS.BLL.Mapping;
-    using MinCQRS.Domain.Extensions;
+﻿using System.Reflection;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using MinCQRS.API.Endpoints;
+using MinCQRS.API.Endpoints.Base;
+using MinCQRS.BLL.Mapping;
+using MinCQRS.Domain.Extensions;
 
+namespace MinCQRS.API.Extensions
+{
     public static class ServiceExtensions
     {
         public static IServiceCollection AddAPIServices(this IServiceCollection services)

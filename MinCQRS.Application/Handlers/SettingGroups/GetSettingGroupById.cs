@@ -10,6 +10,8 @@ namespace MinCQRS.Application.Handlers.SettingGroups
 {
     public sealed class GetSettingGroupByIdQuery : GetByIdQuery<SettingGroupModel>
     {
+        public GetSettingGroupByIdQuery() { }
+
         public GetSettingGroupByIdQuery(int id) : base(id) { }
     }
 
