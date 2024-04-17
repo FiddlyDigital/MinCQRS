@@ -3,7 +3,7 @@ using MinCQRS.Application.Handlers.Base.Interfaces;
 
 namespace MinCQRS.Application.Handlers.Base.GenericQueries
 {
-    public abstract class GetListQuery<TModel> : IQuery<Result<ICollection<TModel>>>
+    public abstract class GetListQuery<TModel> : IQuery<Result<IEnumerable<TModel>>>
     {
         public GetListQuery() { }
 

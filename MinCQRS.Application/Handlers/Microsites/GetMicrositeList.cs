@@ -24,7 +24,7 @@ namespace MinCQRS.Application.Handlers.Microsites
         }
     }
 
-    public sealed class GetMicrositeListHandler : BaseQueryHandler<GetMicrositeListHandler, GetMicrositeListQuery, ICollection<MicrositeModel>>
+    public sealed class GetMicrositeListHandler : BaseQueryHandler<GetMicrositeListHandler, GetMicrositeListQuery, IEnumerable<MicrositeModel>>
     {
         private readonly IMicrositeService MicrositeService;
 
@@ -36,7 +36,7 @@ namespace MinCQRS.Application.Handlers.Microsites
             this.MicrositeService = MicrositeService;
         }
 
-        protected async override Task<Result<ICollection<MicrositeModel>>> Act(GetMicrositeListQuery request, CancellationToken cancellationToken)
+        protected async override Task<Result<IEnumerable<MicrositeModel>>> Act(GetMicrositeListQuery request, CancellationToken cancellationToken)
         {
             return await MicrositeService.GetList(request.PageIndex, request.PageSize);
         }

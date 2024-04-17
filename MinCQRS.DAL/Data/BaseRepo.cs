@@ -18,9 +18,9 @@ namespace MinCQRS.DAL.Data
             _dbSet = _context.Set<TEntity>();
         }
 
-        public ICollection<TEntity> GetAll(int pageIndex = 0, int pagesize = 25)
+        public IEnumerable<TEntity> GetAll(int pageIndex = 0, int pagesize = 25)
         {
-            return _dbSet.Skip(pageIndex * pagesize).Take(pagesize).ToList();
+            return _dbSet.Skip(pageIndex * pagesize).Take(pagesize);
         }
 
         public async Task<TEntity?> GetById(int id, CancellationToken cancellationToken = default, params string[] includeProperties)

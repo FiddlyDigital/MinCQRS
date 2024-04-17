@@ -24,7 +24,7 @@ namespace MinCQRS.Application.Handlers.SettingGroups
         }
     }
 
-    public sealed class GetSettingGroupListHandler : BaseQueryHandler<GetSettingGroupListHandler, GetSettingGroupListQuery, ICollection<SettingGroupModel>>
+    public sealed class GetSettingGroupListHandler : BaseQueryHandler<GetSettingGroupListHandler, GetSettingGroupListQuery, IEnumerable<SettingGroupModel>>
     {
         private readonly ISettingGroupService settingGroupService;
 
@@ -36,7 +36,7 @@ namespace MinCQRS.Application.Handlers.SettingGroups
             this.settingGroupService = settingGroupService;
         }
 
-        protected async override Task<Result<ICollection<SettingGroupModel>>> Act(GetSettingGroupListQuery request, CancellationToken cancellationToken)
+        protected async override Task<Result<IEnumerable<SettingGroupModel>>> Act(GetSettingGroupListQuery request, CancellationToken cancellationToken)
         {
             return await settingGroupService.GetList(request.PageIndex, request.PageSize);
         }

@@ -5,7 +5,7 @@ namespace MinCQRS.DAL.Data.Interfaces
     public interface IBaseRepository<TEntity>
         where TEntity : BaseEntity
     {
-        ICollection<TEntity> GetAll(int pageIndex, int pagesize);
+        IEnumerable<TEntity> GetAll(int pageIndex, int pagesize);
         Task<TEntity?> GetById(int id, CancellationToken cancellationToken, params string[] includeProperties);
         void Add(TEntity entity);
         void Update(TEntity entity, CancellationToken cancellationToken);

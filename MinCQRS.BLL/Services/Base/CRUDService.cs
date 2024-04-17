@@ -24,19 +24,19 @@ namespace MinCQRS.BLL.Services.Base
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public async Task<Result<ICollection<TModel>>> GetList(int pageIndex, int pageSize)
+        public async Task<Result<IEnumerable<TModel>>> GetList(int pageIndex, int pageSize)
         {
             try
             {
-                ICollection<TEntity> entities = _repository.GetAll(pageIndex, pageSize);
-                ICollection<TModel> list = entities.MapTo<ICollection<TModel>>();
-                return new Result<ICollection<TModel>>(list);
+                IEnumerable<TEntity> entities = _repository.GetAll(pageIndex, pageSize);
+                IEnumerable<TModel> list = entities.MapTo<IEnumerable<TModel>>();
+                return new Result<IEnumerable<TModel>>(list);
             }
             catch (Exception ex)
             {
                 string errorMessage = $"Error getting list of {typeof(TModel).Name}";
                 Logger.LogError(ex, errorMessage);
-                return new Result<ICollection<TModel>>(new Exception(errorMessage, ex));
+                return new Result<IEnumerable<TModel>>(new Exception(errorMessage, ex));
             }
         }
 
