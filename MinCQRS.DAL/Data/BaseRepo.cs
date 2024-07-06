@@ -58,7 +58,7 @@ namespace MinCQRS.DAL.Data
             ArgumentNullException.ThrowIfNull(entity, nameof(entity));
             ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, entity.Id);
             
-            var existingEntity = await _dbSet.FindAsync(new object[] { entity.Id }, cancellationToken: cancellationToken);
+            var existingEntity = await _dbSet.FindAsync([entity.Id], cancellationToken: cancellationToken);
             if (existingEntity is null)
             {
                 throw new Exception($"{typeof(TEntity).Name} with id {entity.Id} does not exist to update.");
@@ -71,7 +71,7 @@ namespace MinCQRS.DAL.Data
         {
             ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, id);
 
-            var existingEntity = await _dbSet.FindAsync(new object[] { id }, cancellationToken: cancellationToken);
+            var existingEntity = await _dbSet.FindAsync([id], cancellationToken: cancellationToken);
             if (existingEntity is null) {
                 throw new Exception($"{typeof(TEntity).Name} with id {id} does not exist to delete.");
             }
