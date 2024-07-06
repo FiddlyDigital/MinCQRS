@@ -14,7 +14,8 @@ namespace MinCQRS.DAL.Data
 
         public BaseRepository(DbContext context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            ArgumentNullException.ThrowIfNull(context, nameof(context));
+            _context = context;
             _dbSet = _context.Set<TEntity>();
         }
 
@@ -77,15 +78,6 @@ namespace MinCQRS.DAL.Data
 
             _dbSet.Remove(existingEntity);
         }
-
-        //public void SaveChanges()
-        //{
-        //    if (Context.ChangeTracker.HasChanges())
-        //    {
-        //        Context.SaveChanges();
-        //    }
-        //}
-
         public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
             if (_context.ChangeTracker.HasChanges())
@@ -93,22 +85,6 @@ namespace MinCQRS.DAL.Data
                 await _context.SaveChangesAsync(cancellationToken);
             }
         }
-
-        //public void RollbackSavedChanges()
-        //{
-        //    if (!Context.ChangeTracker.HasChanges())
-        //    {
-        //        return;
-        //    }
-
-        //    foreach (EntityEntry item in (IEnumerable<EntityEntry>)(
-        //        from e in Context.ChangeTracker.Entries()
-        //        where e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted
-        //        select e).ToList())
-        //    {
-        //        item.State = EntityState.Detached;
-        //    }
-        //}
 
         protected IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken, params string[] includeProperties)
         {
