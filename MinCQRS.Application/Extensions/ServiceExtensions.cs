@@ -6,7 +6,7 @@ using MinCQRS.DAL.Data;
 using MinCQRS.Application.PipelineBehaviors;
 using System;
 using System.Reflection;
-using MinCQRS.Application.Handlers.SettingGroups;
+using MinCQRS.Application.Handlers.Workspace;
 
 
 namespace MinCQRS.Application.Extensions
@@ -20,7 +20,7 @@ namespace MinCQRS.Application.Extensions
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
 
             // Services
-            Assembly applicationAssembly = Assembly.GetAssembly(typeof(GetSettingGroupByIdQuery))
+            Assembly applicationAssembly = Assembly.GetAssembly(typeof(GetWorkspaceByIdQuery))
                 ?? throw new Exception("Can't register handlers and validators for Application");
 
             services.AddMediatR(cfg => {

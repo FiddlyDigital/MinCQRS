@@ -2,7 +2,7 @@
 
 namespace MinCQRS.Domain.Models
 {
-    public sealed class PageTemplateModel : BaseModel
+    public sealed class BoardModel : BaseModel
     {
         public required string Name { get; set; }
     }

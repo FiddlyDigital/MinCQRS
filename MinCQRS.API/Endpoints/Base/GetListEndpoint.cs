@@ -8,7 +8,6 @@ using MinCQRS.API.Constants;
 using MinCQRS.API.Endpoints;
 using MinCQRS.API.Endpoints.Base;
 using MinCQRS.Application.Handlers.Base.GenericQueries;
-using MinCQRS.Application.Handlers.SettingGroups;
 using MinCQRS.Domain.Models;
 using MinCQRS.Domain.Models.Base;
 

@@ -14,12 +14,11 @@ namespace MinCQRS.DAL.Data
             _logger.LogDebug("Context Initialized");
         }
 
-        public virtual DbSet<SettingGroupEntity> SettingGroups { get; set; }
+        public virtual DbSet<WorkspaceEntity> Workspaces { get; set; }
+        public virtual DbSet<BoardEntity> Boards { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SettingGroupEntity>().HasQueryFilter(r => !r.IsDeleted);
-            modelBuilder.Entity<SettingGroupEntity>().HasIndex(r => r.IsDeleted).HasFilter("IsDeleted = 0");
         }
     }
 }

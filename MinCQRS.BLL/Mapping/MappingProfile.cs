@@ -8,8 +8,8 @@ namespace MinCQRS.BLL.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<SettingGroupModel, SettingGroupEntity>();
-            //CreateMap<SettingModel, SettingModelEntity>();
+            CreateMap<WorkspaceModel, WorkspaceEntity>();
+            CreateMap<BoardModel, BoardEntity>();
         }
 
         private new void CreateMap<TSource, TDestination>()

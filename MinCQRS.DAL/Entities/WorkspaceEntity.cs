@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MinCQRS.DAL.Entities
 {
-    public class SettingGroupEntity : BaseEntity
+    public class WorkspaceEntity : BaseEntity
     {
         [Required]
         public required string Name { get; set; }        
 
-        public virtual ICollection<SettingGroupEntity>? SubGroups { get; set; }
+        public virtual ICollection<BoardEntity>? Boards { get; set; }
     }
 }
