@@ -119,6 +119,7 @@ namespace MinCQRS.API
                 });
 
             builder.Services.AddEndpoints(typeof(Program).Assembly);
+            builder.Services.AddResponseCompression();
 
             WebApplication app = builder.Build();
 

@@ -1,5 +1,7 @@
-﻿using System.Reflection;
+﻿using System.IO.Compression;
+using System.Reflection;
 using AutoMapper;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MinCQRS.API.Endpoints;
 using MinCQRS.API.Endpoints.Base;
@@ -23,8 +25,7 @@ namespace MinCQRS.API.Extensions
                     type is { 
                         IsSealed: true,
                         IsAbstract: false, 
-                        IsInterface: false 
-                    } 
+                        IsInterface: false             } 
                     && type.IsAssignableTo(typeof(IEndpoint)))
                 .Select(type => ServiceDescriptor.Transient(typeof(IEndpoint), type))
                 .ToArray();
@@ -56,5 +57,24 @@ namespace MinCQRS.API.Extensions
 
             MappingExtensions.InitializeMapper(mapper);
         }
+
+        public static void ConfigureResponseCompression(this IServiceCollection services)
+        {
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
+            });
+            services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.SmallestSize;
+            });
+        }
+            
     }
 }
