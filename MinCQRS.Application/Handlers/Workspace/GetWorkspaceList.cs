@@ -12,7 +12,7 @@ namespace MinCQRS.Application.Handlers.Workspace
     {
         public GetWorkspaceListQuery() : base() { }
 
-        public GetWorkspaceListQuery(int pageIndex, int pageSize) : base(pageIndex, pageSize) { }
+        public GetWorkspaceListQuery(int pageIndex, int pageSize, string? sortBy, string? sortDir, string? filter) : base(pageIndex, pageSize, sortBy, sortDir, filter) { }
     }
 
     public sealed class GetWorkspaceListQueryValidator : AbstractValidator<GetWorkspaceListQuery>
@@ -38,7 +38,7 @@ namespace MinCQRS.Application.Handlers.Workspace
 
         protected async override Task<Result<IEnumerable<WorkspaceModel>>> Act(GetWorkspaceListQuery request, CancellationToken cancellationToken)
         {
-            return await WorkspaceService.GetList(request.PageIndex, request.PageSize);
+            return await WorkspaceService.GetList(request.PageIndex, request.PageSize, request.SortBy, request.SortDir, request.Filter);
         }
     }
 }

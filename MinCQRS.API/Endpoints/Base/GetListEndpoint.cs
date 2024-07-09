@@ -1,4 +1,5 @@
-﻿using LanguageExt.Common;
+﻿using System.Drawing.Printing;
+using LanguageExt.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
@@ -25,7 +26,7 @@ namespace MinCQRS.API.Endpoints.Base
             EndpointRoute = endpoint;
         }
 
-        private async Task<IResult> GetListAsync(ISender mediator, int page = 1, int pageSize = 25)
+        private async Task<IResult> GetListAsync(ISender mediator, int page = 1, int pageSize = 25, string? sortBy = null, string? sortDir = null, string? filter = null)
         {
             if (page < 1)
             {
@@ -40,7 +41,10 @@ namespace MinCQRS.API.Endpoints.Base
             var getListQuery = new TQuery()
             {
                 PageSize = pageSize,
-                PageIndex = page - 1
+                PageIndex = page - 1,
+                SortBy = sortBy,
+                SortDir = sortDir,
+                Filter = filter
             };
 
             var result = await mediator.Send(getListQuery);
@@ -55,8 +59,11 @@ namespace MinCQRS.API.Endpoints.Base
             app.MapGet(EndpointRoute, (
                     ISender mediator,
                     [FromQuery(Name = "page")] int page,
-                    [FromQuery(Name = "pageSize")] int pageSize
-                ) => GetListAsync(mediator, page, pageSize))
+                    [FromQuery(Name = "pageSize")] int pageSize,
+                    [FromQuery(Name = "sortBy")] string? sortBy,
+                    [FromQuery(Name = "sortDir")] string? sortDir,
+                    [FromQuery(Name = "filter")] string? filter
+                ) => GetListAsync(mediator, page, pageSize, sortBy, sortDir, filter))
                 .WithOpenApi(operation => new(operation)
                 {
                     Summary = "Requests a list of " + EndpointRoute,

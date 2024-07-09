@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using static System.Linq.Expressions.Expression;
 using MinCQRS.DAL.Entities.Base;
 using MinCQRS.DAL.Data.Interfaces;
+using MinCQRS.DAL.Enums;
+using MinCQRS.DAL.Models;
+using System.Reflection;
 
 namespace MinCQRS.DAL.Data
 {
@@ -10,7 +14,7 @@ namespace MinCQRS.DAL.Data
     {
         protected readonly DbContext _context;
         protected readonly DbSet<TEntity> _dbSet;
-        
+
 
         public BaseRepository(DbContext context)
         {
@@ -19,9 +23,29 @@ namespace MinCQRS.DAL.Data
             _dbSet = _context.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetAll(int pageIndex = 0, int pagesize = 25)
+
+        public IEnumerable<TEntity> GetAll(int pageIndex = 0, int pagesize = 25, string? sortBy = null, string? sortDir = null, string? filter = null)
         {
-            return _dbSet.Skip(pageIndex * pagesize).Take(pagesize);
+            IQueryable<TEntity> query = _dbSet.AsQueryable<TEntity>();
+
+            // Props to https://github.com/raulshma/dotnet-dynamic-pagination-filtering-sorting 
+            if (!string.IsNullOrEmpty(filter))
+            {
+                FilterParameters filterParameters = FilterParameters.Create(filter);
+                if (!string.IsNullOrEmpty(filterParameters.FilterBy) &&
+                    !string.IsNullOrEmpty(filterParameters.FilterValue) &&
+                    !string.IsNullOrEmpty(filterParameters.FilterOperator))
+                {
+                    query = AddFilterClause(query, filterParameters.FilterBy!, filterParameters.FilterValue!, filterParameters.FilterOperator!);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(sortBy) && !string.IsNullOrEmpty(sortDir))
+            {
+                query = AddSortClause(query, sortBy!, sortDir!);
+            }
+
+            return query.Skip(pageIndex * pagesize).Take(pagesize);
         }
 
         public async Task<TEntity?> GetById(int id, CancellationToken cancellationToken = default, params string[] includeProperties)
@@ -57,7 +81,7 @@ namespace MinCQRS.DAL.Data
         {
             ArgumentNullException.ThrowIfNull(entity, nameof(entity));
             ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, entity.Id);
-            
+
             var existingEntity = await _dbSet.FindAsync([entity.Id], cancellationToken: cancellationToken);
             if (existingEntity is null)
             {
@@ -72,7 +96,8 @@ namespace MinCQRS.DAL.Data
             ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, id);
 
             var existingEntity = await _dbSet.FindAsync([id], cancellationToken: cancellationToken);
-            if (existingEntity is null) {
+            if (existingEntity is null)
+            {
                 throw new Exception($"{typeof(TEntity).Name} with id {id} does not exist to delete.");
             }
 
@@ -102,6 +127,78 @@ namespace MinCQRS.DAL.Data
             }
 
             return _dbSet.Where(predicate);
+        }
+
+        // https://github.com/raulshma/dotnet-dynamic-pagination-filtering-sorting/blob/main/PaginationFilteringSorting.Core/Helpers/QueryHelpers.cs
+
+        private static IQueryable<TEntity> AddFilterClause<TEntity>(IQueryable<TEntity> query, string filterBy, string filterValue, string op = "eq")
+        {
+            var objectType = typeof(TEntity);
+            var property = objectType.GetProperty(filterBy);
+
+            if (property == null)
+            {
+                return query;
+            }
+
+            var propertyType = property.PropertyType;
+            ParameterExpression prm = Parameter(objectType);
+
+            var queryOp = op switch
+            {
+                "eq" => "Equals",
+                "cont" => "Contains",
+                _ => "Equals"
+            };
+
+            var prop = Property(prm, property);
+            var method = propertyType.GetMethod(queryOp, [propertyType])!;
+
+            Expression body = Call(
+                prop,
+                method,
+                Constant(filterValue)
+            );
+
+            if (op == "ne")
+            {
+                body = Not(body);
+            }
+
+            Expression<Func<TEntity, bool>> expr = Lambda<Func<TEntity, bool>>(body, prm);
+            if (expr != null)
+            {
+                query = query.Where(expr);
+            }
+
+            return query;
+        }
+
+        private static IQueryable<T> AddSortClause<T>(IQueryable<T> query, string sort, string sortBy)
+        {
+            var objectType = typeof(T);
+            var property = objectType.GetProperty(sort);
+
+            if (property == null)
+            {
+                return query;
+            }
+
+            var parameter = Parameter(objectType);
+            var accessor = PropertyOrField(parameter, property.Name);
+
+            var expr = Lambda<Func<T, object>>(accessor, parameter);
+
+            if (sortBy == nameof(SortDirection.asc))
+            {
+                return query.OrderBy(expr);
+            }
+            else
+            {
+                return query.OrderByDescending(expr);
+            }
+
+            
         }
     }
 }

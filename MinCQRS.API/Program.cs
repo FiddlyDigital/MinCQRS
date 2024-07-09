@@ -68,6 +68,23 @@ namespace MinCQRS.API
                     });
             });
 
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            builder.Services
+                .AddApiVersioning(options =>
+                {
+                    options.DefaultApiVersion = new ApiVersion(1);
+                    options.ApiVersionReader = new UrlSegmentApiVersionReader();
+                }).AddApiExplorer(options =>
+                {
+                    options.GroupNameFormat = "'v'V";
+                    options.SubstituteApiVersionInUrl = true;
+                });
+
+            builder.Services.AddEndpoints(typeof(Program).Assembly);
+            builder.Services.AddResponseCompression();
+
             return builder;
         }
 
@@ -104,23 +121,6 @@ namespace MinCQRS.API
 
         private static WebApplication CreateAndConfigWebApp(WebApplicationBuilder builder)
         {
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            builder.Services
-                .AddApiVersioning(options =>
-                {
-                    options.DefaultApiVersion = new ApiVersion(1);
-                    options.ApiVersionReader = new UrlSegmentApiVersionReader();
-                }).AddApiExplorer(options =>
-                {
-                    options.GroupNameFormat = "'v'V";
-                    options.SubstituteApiVersionInUrl = true;
-                });
-
-            builder.Services.AddEndpoints(typeof(Program).Assembly);
-            builder.Services.AddResponseCompression();
-
             WebApplication app = builder.Build();
 
             ApiVersionSet apiVersionSet = app.NewApiVersionSet()

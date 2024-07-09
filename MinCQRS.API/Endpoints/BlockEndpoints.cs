@@ -5,10 +5,10 @@ using MinCQRS.Domain.Models;
 
 namespace MinCQRS.API.Endpoints
 {
-    //public sealed class GetBoardListEndpoint : GetListEndpoint<GetBoardListQuery, BoardModel>, IEndpoint
-    //{
-    //    public GetBoardListEndpoint() : base(Resources.Routes.Boards) { }
-    //}
+    public sealed class GetBoardListEndpoint : GetListEndpoint<GetBoardListQuery, BoardModel>, IEndpoint
+    {
+        public GetBoardListEndpoint() : base(Resources.Routes.Boards) { }
+    }
 
     public sealed class GetBoardByIdEndpoint : GetByIdEndpoint<GetBoardByIdQuery, BoardModel>, IEndpoint
     {

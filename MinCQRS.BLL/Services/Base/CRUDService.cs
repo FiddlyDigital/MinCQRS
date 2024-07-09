@@ -24,11 +24,11 @@ namespace MinCQRS.BLL.Services.Base
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public async Task<Result<IEnumerable<TModel>>> GetList(int pageIndex, int pageSize)
+        public async Task<Result<IEnumerable<TModel>>> GetList(int pageIndex, int pageSize, string? sortBy, string? sortDir, string? filter)
         {
             try
             {
-                IEnumerable<TEntity> entities = _repository.GetAll(pageIndex, pageSize);
+                IEnumerable<TEntity> entities = _repository.GetAll(pageIndex, pageSize, sortBy, sortDir, filter);
                 IEnumerable<TModel> list = entities.MapTo<IEnumerable<TModel>>();
                 return new Result<IEnumerable<TModel>>(list);
             }

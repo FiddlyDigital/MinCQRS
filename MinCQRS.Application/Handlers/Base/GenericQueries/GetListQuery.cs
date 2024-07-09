@@ -1,4 +1,5 @@
-﻿using LanguageExt.Common;
+﻿using System.ComponentModel;
+using LanguageExt.Common;
 using MinCQRS.Application.Handlers.Base.Interfaces;
 
 namespace MinCQRS.Application.Handlers.Base.GenericQueries
@@ -7,13 +8,21 @@ namespace MinCQRS.Application.Handlers.Base.GenericQueries
     {
         public GetListQuery() { }
 
-        public GetListQuery(int pageIndex, int pageSize)
+        public GetListQuery(int pageIndex, int pageSize, string? sortby, string? sortDir, string? filter)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
+            SortBy = sortby;
+            SortDir = sortDir;
+            Filter = filter;
         }
 
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
+
+        public string? SortBy { get; set; }
+        public string? SortDir { get; set; }
+
+        public string? Filter { get; set; }
     }
 }
