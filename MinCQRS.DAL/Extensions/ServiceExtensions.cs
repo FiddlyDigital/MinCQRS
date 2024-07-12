@@ -25,8 +25,10 @@ namespace MinCQRS.DAL.Extensions
             );
 
             // Data repositories
-            services.AddScoped<IWorkspaceRepo, WorkspaceRepo>();
             services.AddScoped<IBoardRepo, BoardRepo>();
+            services.AddScoped<ICardRepo, CardRepo>();
+            services.AddScoped<IListRepo, ListRepo>();
+            services.AddScoped<IWorkspaceRepo, WorkspaceRepo>();
 
             return services;
         }

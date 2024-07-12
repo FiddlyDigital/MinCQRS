@@ -7,8 +7,10 @@ namespace MinCQRS.BLL.Extensions
     {
         public static IServiceCollection AddBLLServices(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IWorkspaceService), typeof(WorkspaceService));
             services.AddScoped(typeof(IBoardService), typeof(BoardService));
+            services.AddScoped(typeof(ICardService), typeof(CardService));
+            services.AddScoped(typeof(IListService), typeof(ListService));
+            services.AddScoped(typeof(IWorkspaceService), typeof(WorkspaceService));
             return services;
         }
     }

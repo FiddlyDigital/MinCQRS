@@ -7,5 +7,11 @@ namespace MinCQRS.DAL.Entities
     {
         [Required]
         public required string Name { get; set; }
+
+        public int WorkspaceId { get; set; }
+
+        public virtual WorkspaceEntity? Workspace { get; set; }
+
+        public virtual ICollection<ListEntity>? Lists { get; set; }
     }
 }

@@ -14,8 +14,13 @@ namespace MinCQRS.DAL.Data
             _logger.LogDebug("Context Initialized");
         }
 
-        public virtual DbSet<WorkspaceEntity> Workspaces { get; set; }
         public virtual DbSet<BoardEntity> Boards { get; set; }
+
+        public virtual DbSet<CardEntity> Cards { get; set; }
+
+        public virtual DbSet<ListEntity> Lists { get; set; }
+
+        public virtual DbSet<WorkspaceEntity> Workspaces { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
