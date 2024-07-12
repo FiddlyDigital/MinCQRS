@@ -26,6 +26,9 @@ namespace MinCQRS.BLL.Services.Base
 
         public async Task<Result<IEnumerable<TModel>>> GetList(int pageIndex, int pageSize, string? sortBy, string? sortDir, string? filter)
         {
+            ArgumentOutOfRangeException.ThrowIfLessThan(pageIndex, 0);
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(pageSize);
+
             try
             {
                 IEnumerable<TEntity> entities = _repository.GetAll(pageIndex, pageSize, sortBy, sortDir, filter);
@@ -61,10 +64,7 @@ namespace MinCQRS.BLL.Services.Base
         public async Task<Result<TModel>> Create(TModel model, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(model);
-            if (model.Id != 0)
-            {
-                throw new ArgumentOutOfRangeException($"When creating a new {typeof(TModel).Name}, it cannot have an existing Id value");
-            }
+            ArgumentOutOfRangeException.ThrowIfNotEqual(model.Id, 0, $"When creating a new {typeof(TModel).Name}, it cannot have an existing Id value");
 
             try
             {
