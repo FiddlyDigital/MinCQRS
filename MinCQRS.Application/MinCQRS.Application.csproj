@@ -18,8 +18,4 @@
     <ProjectReference Include="..\MinCQRS.Domain\MinCQRS.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Handlers\Base\GenericCommands\" />
-  </ItemGroup>
-
 </Project>

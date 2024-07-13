@@ -1,6 +1,7 @@
 ﻿using MinCQRS.API.Constants;
 using MinCQRS.API.Endpoints.Base;
 using MinCQRS.Application.Handlers.Card;
+using MinCQRS.Application.Handlers.Card;
 using MinCQRS.Domain.Models;
 
 namespace MinCQRS.API.Endpoints
@@ -13,5 +14,10 @@ namespace MinCQRS.API.Endpoints
     public sealed class GetCardByIdEndpoint : GetByIdEndpoint<GetCardByIdQuery, CardModel>, IEndpoint
     {
         public GetCardByIdEndpoint() : base(Resources.Routes.Cards) { }
+    }
+
+    public sealed class CreateCardEndpoint : CreateEndpoint<CreateCardCommand, CardModel>, IEndpoint
+    {
+        public CreateCardEndpoint() : base(Resources.Routes.Cards) { }
     }
 }

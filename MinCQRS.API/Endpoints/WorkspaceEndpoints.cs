@@ -14,4 +14,9 @@ namespace MinCQRS.API.Endpoints
     {
         public GetWorkspaceByIdEndpoint() : base(Resources.Routes.Workspaces) { }
     }
+
+    public sealed class CreateWorkspaceEndpoint : CreateEndpoint<CreateWorkspaceCommand, WorkspaceModel>, IEndpoint
+    {
+        public CreateWorkspaceEndpoint() : base(Resources.Routes.Workspaces) { }
+    }
 }
