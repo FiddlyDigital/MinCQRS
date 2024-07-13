@@ -1,3 +1,16 @@
-# MINCQRS
+# You too, can Kanban!
 
-A "Breakable Toy" Rest API in .Net that features a CQRS Style workflow using Mediator, as well as Minimal API Endpoints.
+A Trello clone, written as an ASP.NET Restful API.
+Designed as a "Breakable Toy" and to serve as an example of good practices/patterns.
+
+## Features
+
+- .Net 8 ASP.Net Rest API
+- Minimal API Endpoints, with OpenAPI definitions
+- Command Query Seperation
+- N-Tier Architecture
+- Advanced use of Generics and Abstractions, for DRY Implementations
+- Defensive Programming Patterns
+- Architecture Tests (Coming Soon!)
+- Integration Tests (Coming Soon!)
+

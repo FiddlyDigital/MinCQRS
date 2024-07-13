@@ -1,0 +1,46 @@
+﻿using FluentValidation;
+using LanguageExt.Common;
+using Microsoft.Extensions.Logging;
+using YouTooCanKanban.Application.Handlers.Base.GenericQueries;
+using YouTooCanKanban.Application.Handlers.Base;
+using YouTooCanKanban.BLL.Services;
+using YouTooCanKanban.Domain.Models;
+using YouTooCanKanban.DAL.Data.Interfaces;
+
+namespace YouTooCanKanban.Application.Handlers.UseCases.Card
+{
+    public sealed class DeleteCardCommand : DeleteCommand<CardModel>
+    {
+        public DeleteCardCommand() { }
+
+        public DeleteCardCommand(int id) : base(id) { }
+    }
+
+    public sealed class DeleteCardQueryValidator : AbstractValidator<DeleteCardCommand>
+    {
+        public DeleteCardQueryValidator()
+        {
+            RuleFor(x => x.Id).GreaterThan(0);
+        }
+    }
+
+    public sealed class DeleteCardHandler : BaseCommandHandler<DeleteCardHandler, DeleteCardCommand, CardModel>
+    {
+        private readonly ICardService CardService;
+
+        public DeleteCardHandler(
+            ILogger<DeleteCardHandler> logger,
+            IUnitOfWork unitOfWork,
+            ICardService CardService
+        ) : base(logger, unitOfWork)
+        {
+            this.CardService = CardService;
+        }
+
+        protected async override Task<Result<CardModel?>> Act(DeleteCardCommand request, CancellationToken cancellationToken)
+        {
+            await CardService.Delete(request.Id, cancellationToken);
+            return null;
+        }
+    }
+}
