@@ -13,42 +13,41 @@ using MinCQRS.Domain.Models.Base;
 
 namespace MinCQRS.API.Endpoints.Base
 {
-    public abstract class CreateEndpoint<TCommand, TModel>
-        where TCommand : CreateCommand<TModel>, new()
+    public abstract class DeleteEndpoint<TCommand, TModel>
+        where TCommand : DeleteCommand<TModel>, new()
         where TModel : BaseModel
     {
         private readonly string EndpointRoute;
 
-        public CreateEndpoint(string endpoint)
+        public DeleteEndpoint(string endpoint)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(endpoint, nameof(endpoint));
             EndpointRoute = endpoint;
         }
 
-        private static async Task<IResult> CreateAsync(ISender mediator, TModel model)
+        private static async Task<IResult> DeleteAsync(ISender mediator, int id)
         {
-            ArgumentNullException.ThrowIfNull(model, nameof(model));
+            var deleteCommand = new TCommand();
+            deleteCommand.Id = id;
 
-            var createCommand = new TCommand();
-            createCommand.Model = model;
+            var result = await mediator.Send(deleteCommand);
 
-            var result = await mediator.Send(createCommand);
-
+            // We ignore the result value here, and just return no-content to signify successful deletion
             return result.Match(
-                Succ: val => Results.Ok(val),
+                Succ: _ => Results.NoContent(),
                 Fail: exception => Results.Problem(exception.Message));
         }
 
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapPost(EndpointRoute, (
+            app.MapDelete(EndpointRoute + "/{id}", (
                     ISender mediator,
-                    [FromBody()] TModel model
-                ) => CreateAsync(mediator, model))
+                    [FromRoute(Name = "id")] int id
+                ) => DeleteAsync(mediator, id))
                 .WithOpenApi(operation => new(operation)
                 {
-                    Summary = "Creates a new" + EndpointRoute,
-                    Description = "Will create a new " + EndpointRoute + ".",
+                    Summary = "Deletes an existing " + EndpointRoute,
+                    Description = "Will Delete an existing " + EndpointRoute + ".",
                     Tags = new[]
                     {
                         new OpenApiTag()

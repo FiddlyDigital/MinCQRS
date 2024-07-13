@@ -7,7 +7,7 @@ using MinCQRS.BLL.Services;
 using MinCQRS.Domain.Models;
 using MinCQRS.DAL.Data.Interfaces;
 
-namespace MinCQRS.Application.Handlers.List
+namespace MinCQRS.Application.Handlers.UseCases.List
 {
     public sealed class CreateListCommand : CreateCommand<ListModel>
     {

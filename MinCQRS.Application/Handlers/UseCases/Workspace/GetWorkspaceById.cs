@@ -6,7 +6,7 @@ using MinCQRS.Application.Handlers.Base.GenericQueries;
 using MinCQRS.BLL.Services;
 using MinCQRS.Domain.Models;
 
-namespace MinCQRS.Application.Handlers.Workspace
+namespace MinCQRS.Application.Handlers.UseCases.Workspace
 {
     public sealed class GetWorkspaceByIdQuery : GetByIdQuery<WorkspaceModel>
     {
@@ -32,7 +32,7 @@ namespace MinCQRS.Application.Handlers.Workspace
             IWorkspaceService Workspaceervice
         ) : base(logger)
         {
-            this.WorkspaceService = Workspaceervice;
+            WorkspaceService = Workspaceervice;
         }
 
         protected async override Task<Result<WorkspaceModel?>> Act(GetWorkspaceByIdQuery request, CancellationToken cancellationToken)

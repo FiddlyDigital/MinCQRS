@@ -6,7 +6,7 @@ using MinCQRS.Application.Handlers.Base.GenericQueries;
 using MinCQRS.BLL.Services;
 using MinCQRS.Domain.Models;
 
-namespace MinCQRS.Application.Handlers.Card
+namespace MinCQRS.Application.Handlers.UseCases.Card
 {
     public sealed class GetCardListQuery : GetListQuery<CardModel>
     {

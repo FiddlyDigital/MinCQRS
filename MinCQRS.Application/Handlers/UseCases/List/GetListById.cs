@@ -6,7 +6,7 @@ using MinCQRS.Application.Handlers.Base.GenericQueries;
 using MinCQRS.BLL.Services;
 using MinCQRS.Domain.Models;
 
-namespace MinCQRS.Application.Handlers.List
+namespace MinCQRS.Application.Handlers.UseCases.List
 {
     public sealed class GetListByIdQuery : GetByIdQuery<ListModel>
     {
@@ -32,7 +32,7 @@ namespace MinCQRS.Application.Handlers.List
             IListService Listervice
         ) : base(logger)
         {
-            this.ListService = Listervice;
+            ListService = Listervice;
         }
 
         protected async override Task<Result<ListModel?>> Act(GetListByIdQuery request, CancellationToken cancellationToken)

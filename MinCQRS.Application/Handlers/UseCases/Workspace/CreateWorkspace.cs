@@ -7,7 +7,7 @@ using MinCQRS.BLL.Services;
 using MinCQRS.Domain.Models;
 using MinCQRS.DAL.Data.Interfaces;
 
-namespace MinCQRS.Application.Handlers.Workspace
+namespace MinCQRS.Application.Handlers.UseCases.Workspace
 {
     public sealed class CreateWorkspaceCommand : CreateCommand<WorkspaceModel>
     {
@@ -34,7 +34,7 @@ namespace MinCQRS.Application.Handlers.Workspace
             IWorkspaceService workspaceService
         ) : base(logger, unitOfWork)
         {
-            this.WorkspaceService = workspaceService;
+            WorkspaceService = workspaceService;
         }
 
         protected async override Task<Result<WorkspaceModel?>> Act(CreateWorkspaceCommand request, CancellationToken cancellationToken)

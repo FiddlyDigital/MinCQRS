@@ -6,7 +6,7 @@ using MinCQRS.Application.Handlers.Base.GenericQueries;
 using MinCQRS.BLL.Services;
 using MinCQRS.Domain.Models;
 
-namespace MinCQRS.Application.Handlers.List
+namespace MinCQRS.Application.Handlers.UseCases.List
 {
     public sealed class GetListListQuery : GetListQuery<ListModel>
     {

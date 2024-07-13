@@ -6,7 +6,7 @@ using MinCQRS.DAL.Data;
 using MinCQRS.Application.PipelineBehaviors;
 using System;
 using System.Reflection;
-using MinCQRS.Application.Handlers.Workspace;
+using MinCQRS.Application.Handlers.UseCases.Workspace;
 
 
 namespace MinCQRS.Application.Extensions

@@ -6,7 +6,7 @@ using MinCQRS.Application.Handlers.Base.GenericQueries;
 using MinCQRS.BLL.Services;
 using MinCQRS.Domain.Models;
 
-namespace MinCQRS.Application.Handlers.Board
+namespace MinCQRS.Application.Handlers.UseCases.Board
 {
     public sealed class GetBoardByIdQuery : GetByIdQuery<BoardModel>
     {
@@ -32,7 +32,7 @@ namespace MinCQRS.Application.Handlers.Board
             IBoardService Boardervice
         ) : base(logger)
         {
-            this.BoardService = Boardervice;
+            BoardService = Boardervice;
         }
 
         protected async override Task<Result<BoardModel?>> Act(GetBoardByIdQuery request, CancellationToken cancellationToken)

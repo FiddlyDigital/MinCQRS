@@ -6,7 +6,7 @@ using MinCQRS.Application.Handlers.Base.GenericQueries;
 using MinCQRS.BLL.Services;
 using MinCQRS.Domain.Models;
 
-namespace MinCQRS.Application.Handlers.Card
+namespace MinCQRS.Application.Handlers.UseCases.Card
 {
     public sealed class GetCardByIdQuery : GetByIdQuery<CardModel>
     {
@@ -32,7 +32,7 @@ namespace MinCQRS.Application.Handlers.Card
             ICardService Cardervice
         ) : base(logger)
         {
-            this.CardService = Cardervice;
+            CardService = Cardervice;
         }
 
         protected async override Task<Result<CardModel?>> Act(GetCardByIdQuery request, CancellationToken cancellationToken)

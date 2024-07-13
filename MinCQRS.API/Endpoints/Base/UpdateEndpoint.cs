@@ -13,42 +13,49 @@ using MinCQRS.Domain.Models.Base;
 
 namespace MinCQRS.API.Endpoints.Base
 {
-    public abstract class CreateEndpoint<TCommand, TModel>
-        where TCommand : CreateCommand<TModel>, new()
+    public abstract class UpdateEndpoint<TCommand, TModel>
+        where TCommand : UpdateCommand<TModel>, new()
         where TModel : BaseModel
     {
         private readonly string EndpointRoute;
 
-        public CreateEndpoint(string endpoint)
+        public UpdateEndpoint(string endpoint)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(endpoint, nameof(endpoint));
             EndpointRoute = endpoint;
         }
 
-        private static async Task<IResult> CreateAsync(ISender mediator, TModel model)
+        private static async Task<IResult> UpdateAsync(ISender mediator, int id, TModel model)
         {
             ArgumentNullException.ThrowIfNull(model, nameof(model));
 
-            var createCommand = new TCommand();
-            createCommand.Model = model;
+            if (id <= 0 || id != model.Id)
+            {
+                throw new ArgumentException("Id mismatch", nameof(id));
+            }
 
-            var result = await mediator.Send(createCommand);
+            var updateCommand = new TCommand();
+            updateCommand.Model = model;
 
+            var result = await mediator.Send(updateCommand);
+
+            // We ignore the result value here, and just return no-content to signify success
             return result.Match(
-                Succ: val => Results.Ok(val),
+                Succ: _ => Results.NoContent(),
                 Fail: exception => Results.Problem(exception.Message));
         }
 
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapPost(EndpointRoute, (
+            app.MapPut(EndpointRoute + "/{id}", (
                     ISender mediator,
+                    [FromRoute(Name = "id")] int id,
                     [FromBody()] TModel model
-                ) => CreateAsync(mediator, model))
+                ) => UpdateAsync(mediator, id, model))
                 .WithOpenApi(operation => new(operation)
                 {
-                    Summary = "Creates a new" + EndpointRoute,
-                    Description = "Will create a new " + EndpointRoute + ".",
+                    Summary = "Updates an existing " + EndpointRoute,
+                    Description = "Will Update an existing " + EndpointRoute + ".",
                     Tags = new[]
                     {
                         new OpenApiTag()
