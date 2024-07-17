@@ -23,7 +23,7 @@ namespace YouTooCanKanban.DAL.Data
 
         public IEnumerable<TEntity> GetAll(int pageIndex = 0, int pagesize = 25, string? sortBy = null, string? sortDir = null, string? filter = null)
         {
-            IQueryable<TEntity> query = _dbSet.AsQueryable<TEntity>();
+            IQueryable<TEntity> query = _dbSet.AsQueryable<TEntity>().Where(x => !x.IsDeleted);
 
             // Props to https://github.com/raulshma/dotnet-dynamic-pagination-filtering-sorting 
             if (!string.IsNullOrEmpty(filter))
@@ -90,7 +90,7 @@ namespace YouTooCanKanban.DAL.Data
 
         public async void Delete(int id, CancellationToken cancellationToken = default)
         {
-            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, id);
+            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(id, 0);
 
             var existingEntity = await _dbSet.FindAsync([id], cancellationToken: cancellationToken);
             if (existingEntity is null)
