@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using static System.Linq.Expressions.Expression;
-using YouTooCanKanban.DAL.Entities.Base;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using YouTooCanKanban.DAL.Data.Interfaces;
+using YouTooCanKanban.DAL.Entities.Base;
 using YouTooCanKanban.DAL.Enums;
 using YouTooCanKanban.DAL.Models;
-using System.Reflection;
+using static System.Linq.Expressions.Expression;
 
 namespace YouTooCanKanban.DAL.Data
 {
@@ -15,14 +14,12 @@ namespace YouTooCanKanban.DAL.Data
         protected readonly DbContext _context;
         protected readonly DbSet<TEntity> _dbSet;
 
-
         public BaseRepository(DbContext context)
         {
             ArgumentNullException.ThrowIfNull(context, nameof(context));
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }
-
 
         public IEnumerable<TEntity> GetAll(int pageIndex = 0, int pagesize = 25, string? sortBy = null, string? sortDir = null, string? filter = null)
         {
@@ -54,7 +51,7 @@ namespace YouTooCanKanban.DAL.Data
 
             TEntity? entity = null;
 
-            if (includeProperties is not null && includeProperties.Length != 0)
+            if (includeProperties is not null && includeProperties.Any())
             {
                 entity = Find(e => e.Id == id, cancellationToken, includeProperties).SingleOrDefault();
             }
@@ -103,6 +100,7 @@ namespace YouTooCanKanban.DAL.Data
 
             _dbSet.Remove(existingEntity);
         }
+
         public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
             if (_context.ChangeTracker.HasChanges())
@@ -130,7 +128,6 @@ namespace YouTooCanKanban.DAL.Data
         }
 
         // https://github.com/raulshma/dotnet-dynamic-pagination-filtering-sorting/blob/main/PaginationFilteringSorting.Core/Helpers/QueryHelpers.cs
-
         private static IQueryable<TEntity> AddFilterClause<TEntity>(IQueryable<TEntity> query, string filterBy, string filterValue, string op = "eq")
         {
             var objectType = typeof(TEntity);
@@ -197,8 +194,6 @@ namespace YouTooCanKanban.DAL.Data
             {
                 return query.OrderByDescending(expr);
             }
-
-            
         }
     }
 }

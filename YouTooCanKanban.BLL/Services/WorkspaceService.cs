@@ -15,7 +15,7 @@ namespace YouTooCanKanban.BLL.Services
     public sealed class WorkspaceService : CRUDService<WorkspaceService, WorkspaceModel, WorkspaceEntity>, IWorkspaceService
     {
 
-        public WorkspaceService(ILogger<WorkspaceService> logger, IWorkspaceRepo repository) : base(logger, repository)
+        public WorkspaceService(ILogger<WorkspaceService> logger, IWorkspaceRepo repository) : base(logger, repository) //, [nameof(BoardEntity)])
         {
 
         }

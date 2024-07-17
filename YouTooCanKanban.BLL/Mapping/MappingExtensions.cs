@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace YouTooCanKanban.Domain.Extensions
+namespace YouTooCanKanban.BLL.Mapping
 {
 
     public static class MappingExtensions

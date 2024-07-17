@@ -45,7 +45,7 @@ namespace YouTooCanKanban.Architecture.Tests
         }
 
         private Assembly GetDomainAssembly() {
-            return typeof(Domain.Extensions.MappingExtensions).Assembly;
+            return typeof(Domain.Models.Base.BaseModel).Assembly;
         }
         
     }

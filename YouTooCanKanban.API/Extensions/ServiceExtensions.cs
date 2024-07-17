@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using YouTooCanKanban.API.Endpoints;
 using YouTooCanKanban.API.Endpoints.Base;
 using YouTooCanKanban.BLL.Mapping;
-using YouTooCanKanban.Domain.Extensions;
 
 namespace YouTooCanKanban.API.Extensions
 {

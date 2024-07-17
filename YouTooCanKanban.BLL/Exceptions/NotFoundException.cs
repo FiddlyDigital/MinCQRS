@@ -1,4 +1,4 @@
-﻿namespace YouTooCanKanban.Domain.Exceptions
+﻿namespace YouTooCanKanban.BLL.Exceptions
 {
     public sealed class NotFoundException : Exception
     {

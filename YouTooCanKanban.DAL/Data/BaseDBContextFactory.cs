@@ -9,6 +9,17 @@ namespace YouTooCanKanban.DAL.Data
     {
         private readonly ILogger<BaseDBContext> logger;
 
+        // Only exists for generating migrations
+        public BaseDBContextFactory()
+        {
+            this.logger = new Logger<BaseDBContext>(LoggerFactory.Create(builder =>
+            {
+                builder.AddFilter("Microsoft", LogLevel.Warning)
+                       .AddFilter("System", LogLevel.Warning)
+                       .AddFilter("YouTooCanKanban.DAL", LogLevel.Debug);
+            }));
+        }
+
         public BaseDBContextFactory(ILogger<BaseDBContext> logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -25,10 +36,9 @@ namespace YouTooCanKanban.DAL.Data
                 .Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<BaseDBContext>();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DBConn"));
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DBConn"), builder => builder.MigrationsAssembly("YouTooCanKanban.DAL"));
             return new BaseDBContext(optionsBuilder.Options, logger);
 #else
-            // For release builds - to be able to run migrations and updates using azure piplines with EF Migration Bundles
             var optionsBuilder = new DbContextOptionsBuilder<BaseDBContext>();
             optionsBuilder.UseSqlServer();
             return new BaseDBContext(optionsBuilder.Options, logger);

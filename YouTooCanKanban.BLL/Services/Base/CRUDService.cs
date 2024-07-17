@@ -1,12 +1,12 @@
-﻿using LanguageExt.Common;
+﻿using System.Globalization;
+using LanguageExt.Common;
 using Microsoft.Extensions.Logging;
+using YouTooCanKanban.BLL.Exceptions;
+using YouTooCanKanban.BLL.Mapping;
 using YouTooCanKanban.BLL.Services.Base.Interfaces;
 using YouTooCanKanban.DAL.Data.Interfaces;
 using YouTooCanKanban.DAL.Entities.Base;
-using YouTooCanKanban.Domain.Exceptions;
-using YouTooCanKanban.Domain.Extensions;
 using YouTooCanKanban.Domain.Models.Base;
-using System.Globalization;
 
 namespace YouTooCanKanban.BLL.Services.Base
 {
@@ -16,12 +16,12 @@ namespace YouTooCanKanban.BLL.Services.Base
         where TEntity : BaseEntity
     {
         protected readonly IBaseRepository<TEntity> _repository;
+        protected string[] _includedProperties;
 
-        // TODO: IncludedProperties(Entities) string[]
-
-        public CRUDService(ILogger<TService> logger, IBaseRepository<TEntity> repository) : base(logger)
+        public CRUDService(ILogger<TService> logger, IBaseRepository<TEntity> repository, string[]? includedProperties = null) : base(logger)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _includedProperties = includedProperties ?? [];
         }
 
         public async Task<Result<IEnumerable<TModel>>> GetList(int pageIndex, int pageSize, string? sortBy, string? sortDir, string? filter)
@@ -118,7 +118,7 @@ namespace YouTooCanKanban.BLL.Services.Base
 
         private async Task<TEntity> GetFromRepoById(int id, CancellationToken cancellationToken)
         {
-            TEntity? entity = await _repository.GetById(id, cancellationToken);
+            TEntity? entity = await _repository.GetById(id, cancellationToken, _includedProperties);
             if (entity is null)
             {
                 throw new NotFoundException(id.ToString(CultureInfo.InvariantCulture), typeof(TModel).Name);
