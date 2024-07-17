@@ -13,3 +13,11 @@ Designed as a "Breakable Toy" and to serve as an example of good practices/patte
 - Defensive Programming Patterns
 - Architecture Tests (Coming Soon!)
 - Integration Tests (Coming Soon!)
+
+## Instructions
+
+### Migrations
+
+- Go to PMC in VisualStudio
+  - ```add-migration InitialMigration```
+  - ```update-database```

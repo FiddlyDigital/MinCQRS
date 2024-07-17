@@ -36,7 +36,7 @@ namespace YouTooCanKanban.DAL.Data
                 .Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<BaseDBContext>();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DBConn"), builder => builder.MigrationsAssembly("YouTooCanKanban.DAL"));
+            optionsBuilder.UseSqlite(configuration.GetConnectionString("DBConn"), builder => builder.MigrationsAssembly("YouTooCanKanban.DAL"));
             return new BaseDBContext(optionsBuilder.Options, logger);
 #else
             var optionsBuilder = new DbContextOptionsBuilder<BaseDBContext>();

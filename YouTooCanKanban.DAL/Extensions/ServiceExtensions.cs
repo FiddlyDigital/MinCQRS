@@ -14,8 +14,10 @@ namespace YouTooCanKanban.DAL.Extensions
 
             services.AddSingleton<SoftDeleteInterceptor>();
 
-            services.AddDbContext<BaseDBContext>((sp, options) => 
-                options.UseSqlServer(
+            services.AddDbContext<BaseDBContext>((sp, options) =>
+                
+                //options.UseSqlServer(
+                options.UseSqlite(
                     connectionString,
                     t => t.MigrationsAssembly("YouTooCanKanban.DAL")
                 )
