@@ -9,6 +9,8 @@ namespace YouTooCanKanban.Domain.Models
 
         public string? Description { get; set; }
 
-        public string? Labels { get; set; }
+        public Collection<LabelModel>? Labels { get; set; } = null;
+
+        public CardModel() { }
     }
 }

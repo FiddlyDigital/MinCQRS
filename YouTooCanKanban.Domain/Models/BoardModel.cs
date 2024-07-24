@@ -7,11 +7,10 @@ namespace YouTooCanKanban.Domain.Models
     {
         public int WorkspaceId { get; set; }
 
-        public Collection<ListModel>? Lists { get; set; }
+        public Collection<ListModel>? Lists { get; set; } = null;
 
-        public BoardModel() 
-        { 
-            this.Lists = [];
-        }
+        public Collection<LabelModel>? Labels { get; set; } = null;
+
+        public BoardModel() { }
     }
 }

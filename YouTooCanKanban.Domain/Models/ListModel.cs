@@ -11,11 +11,8 @@ namespace YouTooCanKanban.Domain.Models
 
         public int SortOrder { get; set; }
 
-        public Collection<CardModel>? Cards { get; set; }
+        public Collection<CardModel>? Cards { get; set; } = null;
 
-        public ListModel()
-        {
-            this.Cards = [];
-        }
+        public ListModel() { }
     }
 }

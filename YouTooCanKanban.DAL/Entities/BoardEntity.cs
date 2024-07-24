@@ -12,6 +12,8 @@ namespace YouTooCanKanban.DAL.Entities
 
         public virtual WorkspaceEntity? Workspace { get; set; }
 
+        public virtual ICollection<LabelEntity>? Labels { get; set; }
+
         public virtual ICollection<ListEntity>? Lists { get; set; }
     }
 }

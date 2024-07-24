@@ -71,6 +71,7 @@ namespace YouTooCanKanban.DAL.Data
                 throw new ArgumentOutOfRangeException(nameof(entity), "Entities cannot be created with Ids greater than Zero.");
             }
 
+            entity.CreatedDate = DateTime.UtcNow;
             _dbSet.Add(entity);
         }
 
@@ -85,6 +86,7 @@ namespace YouTooCanKanban.DAL.Data
                 throw new Exception($"{typeof(TEntity).Name} with id {entity.Id} does not exist to update.");
             }
 
+            entity.UpdatedDate = DateTime.UtcNow;
             _dbSet.Update(entity);
         }
 

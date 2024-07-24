@@ -22,6 +22,8 @@ namespace YouTooCanKanban.DAL.Data
 
         public virtual DbSet<WorkspaceEntity> Workspaces { get; set; }
 
+        public virtual DbSet<LabelEntity> Labels { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }

@@ -5,11 +5,8 @@ namespace YouTooCanKanban.Domain.Models
 {
     public sealed class WorkspaceModel : BaseModel
     {
-        public Collection<BoardModel>? Boards { get; set; }
+        public Collection<BoardModel>? Boards { get; set; } = null;
 
-        public WorkspaceModel()
-        {
-            this.Boards = [];
-        }
+        public WorkspaceModel() { }
     }
 }

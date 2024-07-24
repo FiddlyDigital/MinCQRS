@@ -2,6 +2,7 @@
 using Asp.Versioning.Builder;
 using Hellang.Middleware.ProblemDetails;
 using Hellang.Middleware.ProblemDetails.Mvc;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -50,6 +51,11 @@ namespace YouTooCanKanban.API
             builder.Services.AddSwaggerGen();
             builder.Services.ConfigureAutoMapper();
             builder.Services.AddLogging();
+            builder.Services.Configure<JsonOptions>(options =>
+            {
+                // Set this to true to ignore null or default values
+                options.SerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+            });
 
             builder.Services.AddCors(options =>
             {

@@ -11,5 +11,7 @@ namespace YouTooCanKanban.DAL.Entities
         public int ListId { get; set; }
 
         public virtual ListEntity? List { get; set; }
+
+        public virtual ICollection<LabelEntity>? Labels { get; set; }
     }
 }
