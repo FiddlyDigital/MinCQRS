@@ -21,6 +21,8 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Workspace
         public UpdateWorkspaceQueryValidator()
         {
             RuleFor(x => x.Model).NotNull();
+            RuleFor(x => x.Model.Id).GreaterThanOrEqualTo(1);
+            RuleFor(x => x.Model.Name).NotNull().NotEmpty();
         }
     }
 

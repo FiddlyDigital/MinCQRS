@@ -51,7 +51,7 @@ namespace YouTooCanKanban.DAL.Data
 
             TEntity? entity = null;
 
-            if (includeProperties is not null && includeProperties.Any())
+            if (includeProperties is not null && includeProperties.Length > 0)
             {
                 entity = Find(e => e.Id == id, cancellationToken, includeProperties).SingleOrDefault();
             }

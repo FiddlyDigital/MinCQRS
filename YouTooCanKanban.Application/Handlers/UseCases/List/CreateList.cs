@@ -21,6 +21,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.List
         public CreateListQueryValidator()
         {
             RuleFor(x => x.Model).NotNull();
+            RuleFor(x => x.Model.Id).LessThanOrEqualTo(0).GreaterThanOrEqualTo(-1);
+            RuleFor(x => x.Model.Name).NotNull().NotEmpty();
+            RuleFor(x => x.Model.BoardId).GreaterThanOrEqualTo(1);
         }
     }
 

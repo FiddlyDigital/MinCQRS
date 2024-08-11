@@ -19,7 +19,7 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Workspace
     {
         public GetWorkspaceListQueryValidator()
         {
-            RuleFor(x => x.PageIndex).GreaterThan(-1).LessThan(100);
+            RuleFor(x => x.PageIndex).GreaterThan(-1);
             RuleFor(x => x.PageSize).GreaterThan(-1).LessThanOrEqualTo(50);
         }
     }

@@ -28,8 +28,8 @@ namespace YouTooCanKanban.API
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-            var appInsightsKey = builder.Configuration.GetValue<string>("ApplicationInsights:InstrumentationKey");
-            var dbConn = builder.Configuration.GetConnectionString("DBConn");
+            string? appInsightsKey = builder.Configuration.GetValue<string>("ApplicationInsights:InstrumentationKey");
+            string? dbConn = builder.Configuration.GetConnectionString("DBConn");
             if (string.IsNullOrEmpty(dbConn))
             {
                 Console.WriteLine("Database connection string is not defined. Aborting startup");

@@ -29,7 +29,7 @@ namespace YouTooCanKanban.API.Endpoints.Base
         {
             ArgumentNullException.ThrowIfNull(model, nameof(model));
 
-            if (id <= 0 || id != model.Id)
+            if (id <= 0 || model.Id <= 0 || id != model.Id)
             {
                 throw new ArgumentException("Id mismatch", nameof(id));
             }

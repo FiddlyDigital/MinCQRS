@@ -21,6 +21,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Card
         public UpdateCardQueryValidator()
         {
             RuleFor(x => x.Model).NotNull();
+            RuleFor(x => x.Model.Id).GreaterThanOrEqualTo(1);
+            RuleFor(x => x.Model.Name).NotNull().NotEmpty();
+            RuleFor(x => x.Model.ListId).GreaterThanOrEqualTo(1);
         }
     }
 

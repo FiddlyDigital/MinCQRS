@@ -28,7 +28,6 @@ namespace YouTooCanKanban.Application.Extensions
                 //cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
             });
             services.AddValidatorsFromAssembly(applicationAssembly, includeInternalTypes: true);
-            services.AddScoped(typeof(IUnitOfWork), typeof(EFUnitOfWork<BaseDBContext>));
 
             return services;
         }

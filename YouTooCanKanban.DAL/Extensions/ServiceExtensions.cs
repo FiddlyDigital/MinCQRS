@@ -29,6 +29,7 @@ namespace YouTooCanKanban.DAL.Extensions
             // Data repositories
             services.AddScoped<IBoardRepo, BoardRepo>();
             services.AddScoped<ICardRepo, CardRepo>();
+            services.AddScoped<ILabelRepo, LabelRepo>();
             services.AddScoped<IListRepo, ListRepo>();
             services.AddScoped<IWorkspaceRepo, WorkspaceRepo>();
 
