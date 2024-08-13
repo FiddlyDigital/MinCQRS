@@ -45,13 +45,10 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Card
 
         protected async override Task<Result<CardModel?>> Act(CreateCardCommand request, CancellationToken cancellationToken)
         {
-            Result<ListModel?> retriveExistingList = await this.ListService.GetById(request.Model.ListId, cancellationToken);
-            if (!retriveExistingList.IsSuccess)
-            {
-                return new Result<CardModel>(new Exception("List does not exist, cannot create Card"));
-            }
-
-            return await CardService.Create(request.Model, cancellationToken);            
+            Result<CardModel?> newCardResult = await CardService.Create(request.Model, cancellationToken);
+            return newCardResult.Match(
+                Succ: newCard => newCard,
+                Fail: exc => new Result<CardModel?>(new Exception("Could not create Card", exc)));
         }
     }
 }

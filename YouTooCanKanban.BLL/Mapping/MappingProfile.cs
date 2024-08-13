@@ -10,6 +10,9 @@ namespace YouTooCanKanban.BLL.Mapping
         {
             CreateMap<WorkspaceModel, WorkspaceEntity>();
             CreateMap<BoardModel, BoardEntity>();
+            CreateMap<ListModel, ListEntity>();
+            CreateMap<CardModel, CardEntity>();
+            CreateMap<LabelModel, LabelEntity>();
         }
 
         private new void CreateMap<TSource, TDestination>()

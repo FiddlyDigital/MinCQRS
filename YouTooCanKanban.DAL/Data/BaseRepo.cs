@@ -45,7 +45,7 @@ namespace YouTooCanKanban.DAL.Data
             return query.Skip(pageIndex * pagesize).Take(pagesize);
         }
 
-        public async Task<TEntity?> GetById(int id, CancellationToken cancellationToken = default, params string[] includeProperties)
+        public async virtual Task<TEntity?> GetById(int id, CancellationToken cancellationToken = default, params string[] includeProperties)
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(id);
 
@@ -78,7 +78,7 @@ namespace YouTooCanKanban.DAL.Data
         public async void Update(TEntity entity, CancellationToken cancellationToken = default)
         {
             ArgumentNullException.ThrowIfNull(entity, nameof(entity));
-            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(0, entity.Id);
+            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(entity.Id, 0);
 
             var existingEntity = await _dbSet.FindAsync([entity.Id], cancellationToken: cancellationToken);
             if (existingEntity is null)
