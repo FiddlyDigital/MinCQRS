@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Workspace
         public CreateWorkspaceCommand(WorkspaceModel workspace) : base(workspace) { }
     }
 
-    public sealed class CreateWorkspaceQueryValidator : AbstractValidator<CreateWorkspaceCommand>
+    public sealed class CreateWorkspaceCommandValidator : AbstractValidator<CreateWorkspaceCommand>
     {
-        public CreateWorkspaceQueryValidator()
+        public CreateWorkspaceCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).LessThanOrEqualTo(0).GreaterThanOrEqualTo(-1);

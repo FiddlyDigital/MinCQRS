@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Label
         public CreateLabelCommand(LabelModel Label) : base(Label) { }
     }
 
-    public sealed class CreateLabelQueryValidator : AbstractValidator<CreateLabelCommand>
+    public sealed class CreateLabelCommandValidator : AbstractValidator<CreateLabelCommand>
     {
-        public CreateLabelQueryValidator()
+        public CreateLabelCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).LessThanOrEqualTo(0).GreaterThanOrEqualTo(-1);

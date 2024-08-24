@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Board
         public CreateBoardCommand(BoardModel Board) : base(Board) { }
     }
 
-    public sealed class CreateBoardQueryValidator : AbstractValidator<CreateBoardCommand>
+    public sealed class CreateBoardCommandValidator : AbstractValidator<CreateBoardCommand>
     {
-        public CreateBoardQueryValidator()
+        public CreateBoardCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).LessThanOrEqualTo(0).GreaterThanOrEqualTo(-1);

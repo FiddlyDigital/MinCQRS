@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Board
         public UpdateBoardCommand(BoardModel Board) : base(Board) { }
     }
 
-    public sealed class UpdateBoardQueryValidator : AbstractValidator<UpdateBoardCommand>
+    public sealed class UpdateBoardCommandValidator : AbstractValidator<UpdateBoardCommand>
     {
-        public UpdateBoardQueryValidator()
+        public UpdateBoardCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).GreaterThanOrEqualTo(1);

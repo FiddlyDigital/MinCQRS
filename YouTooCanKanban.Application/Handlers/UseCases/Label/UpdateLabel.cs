@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Label
         public UpdateLabelCommand(LabelModel Label) : base(Label) { }
     }
 
-    public sealed class UpdateLabelQueryValidator : AbstractValidator<UpdateLabelCommand>
+    public sealed class UpdateLabelCommandValidator : AbstractValidator<UpdateLabelCommand>
     {
-        public UpdateLabelQueryValidator()
+        public UpdateLabelCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).GreaterThanOrEqualTo(1);

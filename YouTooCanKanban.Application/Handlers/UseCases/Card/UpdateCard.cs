@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Card
         public UpdateCardCommand(CardModel Card) : base(Card) { }
     }
 
-    public sealed class UpdateCardQueryValidator : AbstractValidator<UpdateCardCommand>
+    public sealed class UpdateCardCommandValidator : AbstractValidator<UpdateCardCommand>
     {
-        public UpdateCardQueryValidator()
+        public UpdateCardCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).GreaterThanOrEqualTo(1);

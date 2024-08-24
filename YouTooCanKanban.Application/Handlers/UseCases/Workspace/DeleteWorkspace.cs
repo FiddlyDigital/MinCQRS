@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Workspace
         public DeleteWorkspaceCommand(int id) : base(id) { }
     }
 
-    public sealed class DeleteWorkspaceQueryValidator : AbstractValidator<DeleteWorkspaceCommand>
+    public sealed class DeleteWorkspaceCommandValidator : AbstractValidator<DeleteWorkspaceCommand>
     {
-        public DeleteWorkspaceQueryValidator()
+        public DeleteWorkspaceCommandValidator()
         {
             RuleFor(x => x.Id).GreaterThan(0);
         }

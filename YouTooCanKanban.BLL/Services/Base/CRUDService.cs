@@ -15,12 +15,12 @@ namespace YouTooCanKanban.BLL.Services.Base
         where TModel : BaseModel
         where TEntity : BaseEntity
     {
-        protected readonly IBaseRepository<TEntity> _repository;
+        protected readonly IBaseRepository<TEntity> _modelRepository;
         protected string[] _includedProperties;
 
         public CRUDService(ILogger<TService> logger, IBaseRepository<TEntity> repository, string[]? includedProperties = null) : base(logger)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _modelRepository = repository ?? throw new ArgumentNullException(nameof(repository));
             _includedProperties = includedProperties ?? [];
         }
 
@@ -31,7 +31,7 @@ namespace YouTooCanKanban.BLL.Services.Base
 
             try
             {
-                IEnumerable<TEntity> entities = _repository.GetAll(pageIndex, pageSize, sortBy, sortDir, filter);
+                IEnumerable<TEntity> entities = _modelRepository.GetAll(pageIndex, pageSize, sortBy, sortDir, filter);
                 IEnumerable<TModel> list = entities.MapTo<IEnumerable<TModel>>();
                 return new Result<IEnumerable<TModel>>(list);
             }
@@ -70,8 +70,8 @@ namespace YouTooCanKanban.BLL.Services.Base
             {
                 TEntity modelAsEntity = model.MapTo<TEntity>();
 
-                _repository.Add(modelAsEntity);
-                await _repository.SaveChangesAsync(cancellationToken);
+                _modelRepository.Add(modelAsEntity);
+                await _modelRepository.SaveChangesAsync(cancellationToken);
 
                 model.Id = modelAsEntity.Id;
                 return new Result<TModel>(model);
@@ -92,8 +92,8 @@ namespace YouTooCanKanban.BLL.Services.Base
             try
             {
                 TEntity? entityToUpdate = model.MapTo<TEntity>();
-                _repository.Update(entityToUpdate, cancellationToken);
-                await _repository.SaveChangesAsync(cancellationToken);
+                _modelRepository.Update(entityToUpdate, cancellationToken);
+                await _modelRepository.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {
@@ -107,8 +107,8 @@ namespace YouTooCanKanban.BLL.Services.Base
 
             try
             {
-                _repository.Delete(id, cancellationToken);
-                await _repository.SaveChangesAsync(cancellationToken);
+                _modelRepository.Delete(id, cancellationToken);
+                await _modelRepository.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {
@@ -118,7 +118,7 @@ namespace YouTooCanKanban.BLL.Services.Base
 
         private async Task<TEntity> GetFromRepoById(int id, CancellationToken cancellationToken)
         {
-            TEntity? entity = await _repository.GetById(id, cancellationToken, _includedProperties);
+            TEntity? entity = await _modelRepository.GetById(id, cancellationToken, _includedProperties);
             if (entity is null)
             {
                 throw new NotFoundException(id.ToString(CultureInfo.InvariantCulture), typeof(TModel).Name);

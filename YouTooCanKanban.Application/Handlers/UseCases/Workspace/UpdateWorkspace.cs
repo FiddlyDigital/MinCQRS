@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Workspace
         public UpdateWorkspaceCommand(WorkspaceModel Workspace) : base(Workspace) { }
     }
 
-    public sealed class UpdateWorkspaceQueryValidator : AbstractValidator<UpdateWorkspaceCommand>
+    public sealed class UpdateWorkspaceCommandValidator : AbstractValidator<UpdateWorkspaceCommand>
     {
-        public UpdateWorkspaceQueryValidator()
+        public UpdateWorkspaceCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).GreaterThanOrEqualTo(1);

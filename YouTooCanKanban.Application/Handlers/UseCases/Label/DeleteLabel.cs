@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Label
         public DeleteLabelCommand(int id) : base(id) { }
     }
 
-    public sealed class DeleteLabelQueryValidator : AbstractValidator<DeleteLabelCommand>
+    public sealed class DeleteLabelCommandValidator : AbstractValidator<DeleteLabelCommand>
     {
-        public DeleteLabelQueryValidator()
+        public DeleteLabelCommandValidator()
         {
             RuleFor(x => x.Id).GreaterThan(0);
         }

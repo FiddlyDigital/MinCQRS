@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.List
         public UpdateListCommand(ListModel List) : base(List) { }
     }
 
-    public sealed class UpdateListQueryValidator : AbstractValidator<UpdateListCommand>
+    public sealed class UpdateListCommandValidator : AbstractValidator<UpdateListCommand>
     {
-        public UpdateListQueryValidator()
+        public UpdateListCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).GreaterThanOrEqualTo(1);

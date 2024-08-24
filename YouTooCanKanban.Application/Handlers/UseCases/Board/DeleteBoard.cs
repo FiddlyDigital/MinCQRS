@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Board
         public DeleteBoardCommand(int id) : base(id) { }
     }
 
-    public sealed class DeleteBoardQueryValidator : AbstractValidator<DeleteBoardCommand>
+    public sealed class DeleteBoardCommandValidator : AbstractValidator<DeleteBoardCommand>
     {
-        public DeleteBoardQueryValidator()
+        public DeleteBoardCommandValidator()
         {
             RuleFor(x => x.Id).GreaterThan(0);
         }

@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.List
         public CreateListCommand(ListModel List) : base(List) { }
     }
 
-    public sealed class CreateListQueryValidator : AbstractValidator<CreateListCommand>
+    public sealed class CreateListCommandValidator : AbstractValidator<CreateListCommand>
     {
-        public CreateListQueryValidator()
+        public CreateListCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).LessThanOrEqualTo(0).GreaterThanOrEqualTo(-1);

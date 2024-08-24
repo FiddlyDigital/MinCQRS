@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Card
         public CreateCardCommand(CardModel Card) : base(Card) { }
     }
 
-    public sealed class CreateCardQueryValidator : AbstractValidator<CreateCardCommand>
+    public sealed class CreateCardCommandValidator : AbstractValidator<CreateCardCommand>
     {
-        public CreateCardQueryValidator()
+        public CreateCardCommandValidator()
         {
             RuleFor(x => x.Model).NotNull();
             RuleFor(x => x.Model.Id).LessThanOrEqualTo(0).GreaterThanOrEqualTo(-1);
@@ -35,12 +35,10 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Card
         public CreateCardHandler(
             ILogger<CreateCardHandler> logger,
             IUnitOfWork unitOfWork,
-            ICardService CardService,
-            IListService ListService
+            ICardService CardService
         ) : base(logger, unitOfWork)
         {
             this.CardService = CardService;
-            this.ListService = ListService;
         }
 
         protected async override Task<Result<CardModel?>> Act(CreateCardCommand request, CancellationToken cancellationToken)

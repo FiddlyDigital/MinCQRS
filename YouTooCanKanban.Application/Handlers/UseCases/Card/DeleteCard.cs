@@ -16,9 +16,9 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Card
         public DeleteCardCommand(int id) : base(id) { }
     }
 
-    public sealed class DeleteCardQueryValidator : AbstractValidator<DeleteCardCommand>
+    public sealed class DeleteCardCommandValidator : AbstractValidator<DeleteCardCommand>
     {
-        public DeleteCardQueryValidator()
+        public DeleteCardCommandValidator()
         {
             RuleFor(x => x.Id).GreaterThan(0);
         }
