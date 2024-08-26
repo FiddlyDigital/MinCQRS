@@ -1,9 +1,13 @@
-﻿using YouTooCanKanban.API.Constants;
+﻿using YouTooCanKanban;
+using YouTooCanKanban.API;
+using YouTooCanKanban.API.Constants;
+using YouTooCanKanban.API.Endpoints;
 using YouTooCanKanban.API.Endpoints.Base;
+using YouTooCanKanban.API.Endpoints.Cards;
 using YouTooCanKanban.Application.Handlers.UseCases.Card;
 using YouTooCanKanban.Domain.Models;
 
-namespace YouTooCanKanban.API.Endpoints
+namespace YouTooCanKanban.API.Endpoints.Cards
 {
     public sealed class GetCardListEndpoint : GetListEndpoint<GetCardListQuery, CardModel>, IEndpoint
     {

@@ -1,9 +1,13 @@
-﻿using YouTooCanKanban.API.Constants;
+﻿using YouTooCanKanban;
+using YouTooCanKanban.API;
+using YouTooCanKanban.API.Constants;
+using YouTooCanKanban.API.Endpoints;
 using YouTooCanKanban.API.Endpoints.Base;
+using YouTooCanKanban.API.Endpoints.Labela;
 using YouTooCanKanban.Application.Handlers.UseCases.Label;
 using YouTooCanKanban.Domain.Models;
 
-namespace YouTooCanKanban.API.Endpoints
+namespace YouTooCanKanban.API.Endpoints.Labela
 {
     public sealed class GetLabelListEndpoint : GetListEndpoint<GetLabelListQuery, LabelModel>, IEndpoint
     {

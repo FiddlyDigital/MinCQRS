@@ -1,9 +1,13 @@
-﻿using YouTooCanKanban.API.Constants;
+﻿using YouTooCanKanban;
+using YouTooCanKanban.API;
+using YouTooCanKanban.API.Constants;
+using YouTooCanKanban.API.Endpoints;
 using YouTooCanKanban.API.Endpoints.Base;
+using YouTooCanKanban.API.Endpoints.Workspaces;
 using YouTooCanKanban.Application.Handlers.UseCases.Workspace;
 using YouTooCanKanban.Domain.Models;
 
-namespace YouTooCanKanban.API.Endpoints
+namespace YouTooCanKanban.API.Endpoints.Workspaces
 {
     public sealed class GetWorkspaceListEndpoint : GetListEndpoint<GetWorkspaceListQuery, WorkspaceModel>, IEndpoint
     {

@@ -1,9 +1,13 @@
-﻿using YouTooCanKanban.API.Constants;
+﻿using YouTooCanKanban;
+using YouTooCanKanban.API;
+using YouTooCanKanban.API.Constants;
+using YouTooCanKanban.API.Endpoints;
 using YouTooCanKanban.API.Endpoints.Base;
+using YouTooCanKanban.API.Endpoints.Lists;
 using YouTooCanKanban.Application.Handlers.UseCases.List;
 using YouTooCanKanban.Domain.Models;
 
-namespace YouTooCanKanban.API.Endpoints
+namespace YouTooCanKanban.API.Endpoints.Lists
 {
     public sealed class GetListListEndpoint : GetListEndpoint<GetListListQuery, ListModel>, IEndpoint
     {
