@@ -44,6 +44,8 @@ namespace YouTooCanKanban.BLL.Services
             }
 
             existingCard.Labels.Add(existingLabel);
+            await _modelRepository.SaveChangesAsync(cancellationToken);
+
             return new Result<bool>(true);
         }
 
@@ -67,6 +69,8 @@ namespace YouTooCanKanban.BLL.Services
             }
 
             existingCard.Labels.Remove(existingLabel);
+            await _modelRepository.SaveChangesAsync(cancellationToken);
+
             return new Result<bool>(true);
         }
     }
