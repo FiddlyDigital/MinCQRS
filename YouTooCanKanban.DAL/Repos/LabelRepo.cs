@@ -8,9 +8,6 @@ namespace YouTooCanKanban.DAL.Repos
 
     public sealed class LabelRepo : BaseRepository<LabelEntity>, ILabelRepo
     {
-        public LabelRepo(BaseDBContext context) : base(context)
-        {
-
-        }
+        public LabelRepo(BaseDBContext context) : base(context) { }
     }
 }

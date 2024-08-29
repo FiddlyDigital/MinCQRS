@@ -7,16 +7,11 @@ using YouTooCanKanban.Domain.Models;
 
 namespace YouTooCanKanban.BLL.Services
 {
-    public interface IBoardService : ICrudService<WorkspaceService, BoardModel>
-    {
-
-    }
+    public interface IBoardService : ICrudService<WorkspaceService, BoardModel> { }
 
     public sealed class BoardService : CRUDService<BoardService, BoardModel, BoardEntity>, IBoardService
     {
-        public BoardService(ILogger<BoardService> logger, IBoardRepo repository) : base(logger, repository)
-        {
-
-        }
+        public BoardService(ILogger<BoardService> logger, IBoardRepo repository)
+            : base(logger, repository) { }
     }
 }

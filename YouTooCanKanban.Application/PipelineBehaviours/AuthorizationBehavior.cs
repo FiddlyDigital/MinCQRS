@@ -9,9 +9,7 @@ namespace YouTooCanKanban.Application.PipelineBehaviors
         where TResponse : new()
     {
 
-        public AuthorizationBehavior()
-        {
-        }
+        public AuthorizationBehavior() { }
 
         /// <inheritdoc />
         protected override Task<TResponse> Act(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)

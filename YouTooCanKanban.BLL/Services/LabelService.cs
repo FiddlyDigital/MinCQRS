@@ -7,16 +7,11 @@ using YouTooCanKanban.Domain.Models;
 
 namespace YouTooCanKanban.BLL.Services
 {
-    public interface ILabelService : ICrudService<LabelService, LabelModel>
-    {
-
-    }
+    public interface ILabelService : ICrudService<LabelService, LabelModel> { }
 
     public sealed class LabelService : CRUDService<LabelService, LabelModel, LabelEntity>, ILabelService
     {
-        public LabelService(ILogger<LabelService> logger, ILabelRepo repository) : base(logger, repository)
-        {
-
-        }
+        public LabelService(ILogger<LabelService> logger, ILabelRepo repository)
+            : base(logger, repository) { }
     }
 }

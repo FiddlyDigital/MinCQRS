@@ -10,10 +10,7 @@ namespace YouTooCanKanban.DAL.Repos
     {
         private readonly string[] GetByIDIncludes = { nameof(ListEntity.Cards) };
 
-        public ListRepo(BaseDBContext context) : base(context)
-        {
-
-        }
+        public ListRepo(BaseDBContext context) : base(context) { }
 
         public override Task<ListEntity?> GetById(int id, CancellationToken cancellationToken = default, params string[] includeProperties)
         {
