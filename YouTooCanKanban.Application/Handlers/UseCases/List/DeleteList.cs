@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using LanguageExt.Common;
 using Microsoft.Extensions.Logging;
-using YouTooCanKanban.Application.Handlers.Base.GenericQueries;
 using YouTooCanKanban.Application.Handlers.Base;
+using YouTooCanKanban.Application.Handlers.Base.GenericCommands;
 using YouTooCanKanban.BLL.Services;
-using YouTooCanKanban.Domain.Models;
 using YouTooCanKanban.DAL.Data.Interfaces;
+using YouTooCanKanban.Domain.Models;
 
 namespace YouTooCanKanban.Application.Handlers.UseCases.List
 {

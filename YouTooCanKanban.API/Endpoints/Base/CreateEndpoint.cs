@@ -7,7 +7,7 @@ using YouTooCanKanban.API;
 using YouTooCanKanban.API.Constants;
 using YouTooCanKanban.API.Endpoints;
 using YouTooCanKanban.API.Endpoints.Base;
-using YouTooCanKanban.Application.Handlers.Base.GenericQueries;
+using YouTooCanKanban.Application.Handlers.Base.GenericCommands;
 using YouTooCanKanban.Domain.Models;
 using YouTooCanKanban.Domain.Models.Base;
 

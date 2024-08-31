@@ -1,12 +1,11 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using YouTooCanKanban.DAL.Data.Interfaces;
 using YouTooCanKanban.DAL.Entities.Base;
 using YouTooCanKanban.DAL.Enums;
 using YouTooCanKanban.DAL.Models;
 using static System.Linq.Expressions.Expression;
 
-namespace YouTooCanKanban.DAL.Data
+namespace YouTooCanKanban.DAL.Repos.Base
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity>
         where TEntity : BaseEntity
@@ -23,12 +22,12 @@ namespace YouTooCanKanban.DAL.Data
 
         public IEnumerable<TEntity> GetAll(int pageIndex = 0, int pagesize = 25, string? sortBy = null, string? sortDir = null, string? filter = null)
         {
-            IQueryable<TEntity> query = _dbSet.AsQueryable<TEntity>().Where(x => !x.IsDeleted);
+            var query = _dbSet.AsQueryable<TEntity>().Where(x => !x.IsDeleted);
 
             // Props to https://github.com/raulshma/dotnet-dynamic-pagination-filtering-sorting 
             if (!string.IsNullOrEmpty(filter))
             {
-                FilterParameters filterParameters = FilterParameters.Create(filter);
+                var filterParameters = FilterParameters.Create(filter);
                 if (!string.IsNullOrEmpty(filterParameters.FilterBy) &&
                     !string.IsNullOrEmpty(filterParameters.FilterValue) &&
                     !string.IsNullOrEmpty(filterParameters.FilterOperator))
@@ -103,12 +102,10 @@ namespace YouTooCanKanban.DAL.Data
             _dbSet.Remove(existingEntity);
         }
 
-        public async Task SaveChangesAsync(CancellationToken cancellationToken)
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             if (_context.ChangeTracker.HasChanges())
-            {
                 await _context.SaveChangesAsync(cancellationToken);
-            }
         }
 
         protected IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken, params string[] includeProperties)
@@ -117,8 +114,8 @@ namespace YouTooCanKanban.DAL.Data
 
             if (includeProperties is not null && includeProperties.Length != 0)
             {
-                IQueryable<TEntity> source = _dbSet.Where(predicate).AsQueryable();
-                foreach (string navigationPropertyPath in includeProperties)
+                var source = _dbSet.Where(predicate).AsQueryable();
+                foreach (var navigationPropertyPath in includeProperties)
                 {
                     source = source.Include(navigationPropertyPath);
                 }
@@ -135,13 +132,13 @@ namespace YouTooCanKanban.DAL.Data
             var objectType = typeof(TEntity);
             var property = objectType.GetProperty(filterBy);
 
-            if (property == null)
+            if (property is null)
             {
                 return query;
             }
 
             var propertyType = property.PropertyType;
-            ParameterExpression prm = Parameter(objectType);
+            var prm = Parameter(objectType);
 
             var queryOp = op switch
             {
@@ -160,12 +157,10 @@ namespace YouTooCanKanban.DAL.Data
             );
 
             if (op == "ne")
-            {
                 body = Not(body);
-            }
 
-            Expression<Func<TEntity, bool>> expr = Lambda<Func<TEntity, bool>>(body, prm);
-            if (expr != null)
+            var expr = Lambda<Func<TEntity, bool>>(body, prm);
+            if (expr is not null)
             {
                 query = query.Where(expr);
             }
@@ -178,8 +173,7 @@ namespace YouTooCanKanban.DAL.Data
             var objectType = typeof(T);
             var property = objectType.GetProperty(sort);
 
-            if (property == null)
-            {
+            if (property is null) {
                 return query;
             }
 

@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 using YouTooCanKanban.BLL.Exceptions;
 using YouTooCanKanban.BLL.Mapping;
 using YouTooCanKanban.BLL.Services.Base.Interfaces;
-using YouTooCanKanban.DAL.Data.Interfaces;
 using YouTooCanKanban.DAL.Entities.Base;
+using YouTooCanKanban.DAL.Repos.Base;
 using YouTooCanKanban.Domain.Models.Base;
 
 namespace YouTooCanKanban.BLL.Services.Base

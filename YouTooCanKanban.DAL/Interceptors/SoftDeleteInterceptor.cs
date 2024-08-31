@@ -21,14 +21,11 @@ namespace YouTooCanKanban.DAL.Interceptors
                     .Entries<ISoftDeletable>()
                     .Where(e => e.State == EntityState.Deleted);
 
-            if (entries.Any())
+            foreach (EntityEntry<ISoftDeletable> softDeletable in entries)
             {
-                foreach (EntityEntry<ISoftDeletable> softDeletable in entries)
-                {
-                    softDeletable.State = EntityState.Modified;
-                    softDeletable.Entity.IsDeleted = true;
-                    softDeletable.Entity.DeletedAtUtc = DateTime.UtcNow;
-                }
+                softDeletable.State = EntityState.Modified;
+                softDeletable.Entity.IsDeleted = true;
+                softDeletable.Entity.DeletedAtUtc = DateTime.UtcNow;
             }
 
             return base.SavingChangesAsync(eventData, result, cancellationToken);

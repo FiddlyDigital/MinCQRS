@@ -1,6 +1,6 @@
 ﻿using YouTooCanKanban.DAL.Data;
-using YouTooCanKanban.DAL.Data.Interfaces;
 using YouTooCanKanban.DAL.Entities;
+using YouTooCanKanban.DAL.Repos.Base;
 
 namespace YouTooCanKanban.DAL.Repos
 {
@@ -8,7 +8,7 @@ namespace YouTooCanKanban.DAL.Repos
 
     public sealed class ListRepo : BaseRepository<ListEntity>, IListRepo
     {
-        private readonly string[] GetByIDIncludes = { nameof(ListEntity.Cards) };
+        private readonly string[] GetByIDIncludes = [nameof(ListEntity.Cards)];
 
         public ListRepo(BaseDBContext context) : base(context) { }
 

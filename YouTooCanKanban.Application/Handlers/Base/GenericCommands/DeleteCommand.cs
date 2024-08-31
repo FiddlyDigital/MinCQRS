@@ -2,7 +2,7 @@
 using YouTooCanKanban.Application.Handlers.Base.Interfaces;
 using YouTooCanKanban.Domain.Models.Base;
 
-namespace YouTooCanKanban.Application.Handlers.Base.GenericQueries
+namespace YouTooCanKanban.Application.Handlers.Base.GenericCommands
 {
     public abstract class DeleteCommand<TModel> : ICommand<Result<TModel>>
         where TModel : BaseModel

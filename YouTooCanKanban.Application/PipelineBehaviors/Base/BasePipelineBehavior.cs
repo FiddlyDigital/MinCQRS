@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using MediatR;
 
-namespace YouTooCanKanban.Application.PipelineBehaviours.Base
+namespace YouTooCanKanban.Application.PipelineBehaviors.Base
 {
     public abstract class BasePipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : class, IRequest<TResponse>

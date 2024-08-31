@@ -1,6 +1,6 @@
 ﻿using YouTooCanKanban.DAL.Entities.Base;
 
-namespace YouTooCanKanban.DAL.Data.Interfaces
+namespace YouTooCanKanban.DAL.Repos.Base
 {
     public interface IBaseRepository<TEntity>
         where TEntity : BaseEntity

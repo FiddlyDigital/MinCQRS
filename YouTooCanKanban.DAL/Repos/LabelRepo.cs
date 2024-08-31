@@ -1,6 +1,6 @@
 ﻿using YouTooCanKanban.DAL.Data;
-using YouTooCanKanban.DAL.Data.Interfaces;
 using YouTooCanKanban.DAL.Entities;
+using YouTooCanKanban.DAL.Repos.Base;
 
 namespace YouTooCanKanban.DAL.Repos
 {

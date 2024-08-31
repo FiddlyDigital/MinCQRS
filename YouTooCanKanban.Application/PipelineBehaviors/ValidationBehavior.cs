@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
-using YouTooCanKanban.Application.PipelineBehaviours.Base;
+using YouTooCanKanban.Application.PipelineBehaviors.Base;
 
 namespace YouTooCanKanban.Application.PipelineBehaviors
 {

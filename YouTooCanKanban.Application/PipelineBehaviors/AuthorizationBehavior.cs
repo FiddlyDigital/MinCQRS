@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using YouTooCanKanban.Application.PipelineBehaviours.Base;
+using YouTooCanKanban.Application.PipelineBehaviors.Base;
 using YouTooCanKanban.Application.Handlers.Base.Interfaces;
 
 namespace YouTooCanKanban.Application.PipelineBehaviors
