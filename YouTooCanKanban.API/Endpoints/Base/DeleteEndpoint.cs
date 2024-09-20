@@ -13,9 +13,9 @@ using YouTooCanKanban.Domain.Models.Base;
 
 namespace YouTooCanKanban.API.Endpoints.Base
 {
-    public abstract class DeleteEndpoint<TCommand, TModel>
-        where TCommand : DeleteCommand<TModel>, new()
-        where TModel : BaseModel
+    public abstract class DeleteEndpoint<TCommand, TResponse>
+        where TCommand : DeleteCommand<TResponse>, new()
+        where TResponse : BaseModel
     {
         private readonly string EndpointRoute;
 
@@ -27,8 +27,10 @@ namespace YouTooCanKanban.API.Endpoints.Base
 
         private static async Task<IResult> DeleteAsync(ISender mediator, int id)
         {
-            var deleteCommand = new TCommand();
-            deleteCommand.Id = id;
+            TCommand deleteCommand = new TCommand()
+            {
+                Id = id
+            };
 
             var result = await mediator.Send(deleteCommand);
 

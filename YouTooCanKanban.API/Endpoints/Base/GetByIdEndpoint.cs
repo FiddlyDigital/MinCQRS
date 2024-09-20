@@ -13,9 +13,9 @@ using YouTooCanKanban.Domain.Models.Base;
 
 namespace YouTooCanKanban.API.Endpoints.Base
 {
-    public abstract class GetByIdEndpoint<TQuery, TModel>
-        where TQuery : GetByIdQuery<TModel>, new()
-        where TModel : BaseModel
+    public abstract class GetByIdEndpoint<TQuery, TResponse>
+        where TQuery : GetByIdQuery<TResponse>, new()
+        where TResponse : BaseModel
     {
         private readonly string EndpointRoute;
 
@@ -27,8 +27,10 @@ namespace YouTooCanKanban.API.Endpoints.Base
 
         private static async Task<IResult> GetByIdAsync(ISender mediator, int id)
         {
-            var getByIdQuery = new TQuery();
-            getByIdQuery.Id = id;
+            TQuery getByIdQuery = new TQuery()
+            {
+                Id = id
+            };
 
             var result = await mediator.Send(getByIdQuery);
 

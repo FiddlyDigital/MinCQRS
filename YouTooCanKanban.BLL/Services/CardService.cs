@@ -26,13 +26,13 @@ namespace YouTooCanKanban.BLL.Services
 
         public async Task<Result<bool>> AddLabelToCard(int cardId, int labelId, CancellationToken cancellationToken)
         {
-            var existingLabel = await this.LabelRepo.GetById(labelId, cancellationToken);
-            if (existingLabel is null) 
+            LabelEntity? existingLabel = await this.LabelRepo.GetById(labelId, cancellationToken);
+            if (existingLabel is null)
             {
                 return new Result<bool>(new NotFoundException($"Label {labelId} does not exist."));
             }
-            
-            var existingCard = await this._modelRepository.GetById(cardId, cancellationToken);
+
+            CardEntity? existingCard = await this._modelRepository.GetById(cardId, cancellationToken);
             if (existingCard is null)
             {
                 return new Result<bool>(new NotFoundException($"Card {cardId} does not exist."));
@@ -51,13 +51,13 @@ namespace YouTooCanKanban.BLL.Services
 
         public async Task<Result<bool>> RemoveLabelFromCard(int cardId, int labelId, CancellationToken cancellationToken)
         {
-            var existingLabel = await this.LabelRepo.GetById(labelId, cancellationToken);
+            LabelEntity? existingLabel = await this.LabelRepo.GetById(labelId, cancellationToken);
             if (existingLabel is null)
             {
                 return new Result<bool>(new NotFoundException($"Label {labelId} does not exist."));
             }
 
-            var existingCard = await this._modelRepository.GetById(cardId, cancellationToken);
+            CardEntity? existingCard = await this._modelRepository.GetById(cardId, cancellationToken);
             if (existingCard is null)
             {
                 return new Result<bool>(new NotFoundException($"Card {cardId} does not exist."));

@@ -13,9 +13,9 @@ using YouTooCanKanban.Domain.Models.Base;
 
 namespace YouTooCanKanban.API.Endpoints.Base
 {
-    public abstract class CreateEndpoint<TCommand, TModel>
-        where TCommand : CreateCommand<TModel>, new()
-        where TModel : BaseModel
+    public abstract class CreateEndpoint<TCommand, TResponse>
+        where TCommand : CreateCommand<TResponse>, new()
+        where TResponse : BaseModel
     {
         private readonly string EndpointRoute;
 
@@ -25,12 +25,14 @@ namespace YouTooCanKanban.API.Endpoints.Base
             EndpointRoute = endpoint;
         }
 
-        private static async Task<IResult> CreateAsync(ISender mediator, TModel model)
+        private static async Task<IResult> CreateAsync(ISender mediator, TResponse model)
         {
             ArgumentNullException.ThrowIfNull(model, nameof(model));
 
-            var createCommand = new TCommand();
-            createCommand.Model = model;
+            TCommand createCommand = new TCommand() 
+            {
+                Model = model
+            };            
 
             var result = await mediator.Send(createCommand);
 
@@ -43,7 +45,7 @@ namespace YouTooCanKanban.API.Endpoints.Base
         {
             app.MapPost(EndpointRoute, (
                     ISender mediator,
-                    [FromBody()] TModel model
+                    [FromBody()] TResponse model
                 ) => CreateAsync(mediator, model))
                 .WithOpenApi(operation => new(operation)
                 {

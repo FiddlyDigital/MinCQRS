@@ -14,9 +14,9 @@ using YouTooCanKanban.Domain.Models.Base;
 
 namespace YouTooCanKanban.API.Endpoints.Base
 {
-    public abstract class GetListEndpoint<TQuery, TModel>
-        where TQuery : GetListQuery<TModel>, new()
-        where TModel : BaseModel
+    public abstract class GetListEndpoint<TQuery, TResponse>
+        where TQuery : GetListQuery<TResponse>, new()
+        where TResponse : BaseModel
     {
         private readonly string EndpointRoute;
 
@@ -38,7 +38,7 @@ namespace YouTooCanKanban.API.Endpoints.Base
                 return Results.BadRequest("B");
             }
 
-            var getListQuery = new TQuery()
+            TQuery getListQuery = new TQuery()
             {
                 PageSize = pageSize,
                 PageIndex = page - 1,
@@ -76,7 +76,7 @@ namespace YouTooCanKanban.API.Endpoints.Base
                         }
                     }
                 })
-            .Produces<ICollection<TModel>>(StatusCodes.Status200OK)
+            .Produces<ICollection<TResponse>>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status500InternalServerError);
         }

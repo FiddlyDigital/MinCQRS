@@ -13,9 +13,9 @@ using YouTooCanKanban.Domain.Models.Base;
 
 namespace YouTooCanKanban.API.Endpoints.Base
 {
-    public abstract class UpdateEndpoint<TCommand, TModel>
-        where TCommand : UpdateCommand<TModel>, new()
-        where TModel : BaseModel
+    public abstract class UpdateEndpoint<TCommand, TResponse>
+        where TCommand : UpdateCommand<TResponse>, new()
+        where TResponse : BaseModel
     {
         private readonly string EndpointRoute;
 
@@ -25,7 +25,7 @@ namespace YouTooCanKanban.API.Endpoints.Base
             EndpointRoute = endpoint;
         }
 
-        private static async Task<IResult> UpdateAsync(ISender mediator, int id, TModel model)
+        private static async Task<IResult> UpdateAsync(ISender mediator, int id, TResponse model)
         {
             ArgumentNullException.ThrowIfNull(model, nameof(model));
 
@@ -34,8 +34,10 @@ namespace YouTooCanKanban.API.Endpoints.Base
                 throw new ArgumentException("Id mismatch", nameof(id));
             }
 
-            var updateCommand = new TCommand();
-            updateCommand.Model = model;
+            TCommand updateCommand = new TCommand()
+            {
+                Model = model
+            };            
 
             var result = await mediator.Send(updateCommand);
 
@@ -50,7 +52,7 @@ namespace YouTooCanKanban.API.Endpoints.Base
             app.MapPut(EndpointRoute + "/{id}", (
                     ISender mediator,
                     [FromRoute(Name = "id")] int id,
-                    [FromBody()] TModel model
+                    [FromBody()] TResponse model
                 ) => UpdateAsync(mediator, id, model))
                 .WithOpenApi(operation => new(operation)
                 {

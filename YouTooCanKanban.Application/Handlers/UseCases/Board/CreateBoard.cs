@@ -40,7 +40,7 @@ namespace YouTooCanKanban.Application.Handlers.UseCases.Board
             this.BoardService = BoardService;
         }
 
-        protected async override Task<Result<BoardModel?>> Act(CreateBoardCommand request, CancellationToken cancellationToken)
+        protected async override Task<Result<BoardModel>> Act(CreateBoardCommand request, CancellationToken cancellationToken)
         {
             return await BoardService.Create(request.Model, cancellationToken);
         }
