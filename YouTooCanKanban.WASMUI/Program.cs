@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
+using YouTooCanKanban.API.Client.Extensions;
 
 namespace YouTooCanKanban.WASMUI
 {
@@ -11,7 +13,12 @@ namespace YouTooCanKanban.WASMUI
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            // MudBlazor UI
+            builder.Services.AddMudServices();
+
+            // Refit Client Services DI Registration.
+            string apiHostAddress = "http://localhost:5208";
+            builder.Services.RegisterAPIClientServices(apiHostAddress);
 
             await builder.Build().RunAsync();
         }

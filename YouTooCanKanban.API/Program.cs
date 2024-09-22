@@ -147,9 +147,10 @@ namespace YouTooCanKanban.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                //app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             return app;
         }

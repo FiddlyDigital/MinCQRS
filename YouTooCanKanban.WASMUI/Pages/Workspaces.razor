@@ -1,7 +1,57 @@
-﻿@page "/workspaces"
+﻿@page "/"
+@using System.Collections.ObjectModel
+@using YouTooCanKanban.API.Client.Interfaces
+@using YouTooCanKanban.API.Client.Models
+@using YouTooCanKanban.Domain.Models
+@inject IWorkspacesClient workspacesClient
+@inject IDialogService DialogService
 
 <PageTitle>Workspaces</PageTitle>
-
 <h1>Workspaces</h1>
 
-<p>This component demonstrates Workspaces.</p>
+<MudTable Items="@workspaceList" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <HeaderContent>
+        <MudTh>Id</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>No.Boards</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="No.Boards">@context.Boards?.Count</MudTd>
+        <MudTd DataLabel="Actions"></MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager/>
+    </PagerContent>
+</MudTable>
+
+@code {
+    private bool _loading;
+    private IEnumerable<WorkspaceModel> workspaceList = new List<WorkspaceModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _loading = true;
+
+        try
+        {
+            workspaceList = await workspacesClient.GetList(
+                new GetListParams() { Page = 1, PageSize = 25 }
+            );
+        }
+        catch(Exception exc)
+        {
+            await DialogService.ShowMessageBox(
+                "Error",
+                "Cannot retrieve workspaces:\n" + exc.Message,
+                yesText: "Ok");
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+}
