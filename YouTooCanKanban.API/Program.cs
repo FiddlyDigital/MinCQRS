@@ -60,20 +60,18 @@ namespace YouTooCanKanban.API
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(
-                    "AllowAllHeadersPolicy",
+                    "AllowLocalhostPolicy",
                     policy =>
                     {
                         policy
                             .WithOrigins(
-                                "https://localhost",
-                                "http://localhost",
-                                "https://127.0.0.1",
-                                "http://127.0.0.1"
+                                "https://localhost:44358"
                             )
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     });
             });
+            
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -147,10 +145,10 @@ namespace YouTooCanKanban.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                //app.UseHsts();
+                app.UseCors("AllowLocalhostPolicy");
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             return app;
         }

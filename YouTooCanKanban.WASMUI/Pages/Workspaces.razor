@@ -9,7 +9,7 @@
 <PageTitle>Workspaces</PageTitle>
 <h1>Workspaces</h1>
 
-<MudTable Items="@workspaceList" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+<MudTable Items="@workspaceList" Hover="true" Bordered="true" Striped="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
     <HeaderContent>
         <MudTh>Id</MudTh>
         <MudTh>Name</MudTh>
@@ -20,10 +20,13 @@
         <MudTd DataLabel="Id">@context.Id</MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="No.Boards">@context.Boards?.Count</MudTd>
-        <MudTd DataLabel="Actions"></MudTd>
+        <MudTd DataLabel="Actions">
+            <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Edit" Color="Color.Primary" Size="Size.Small">Edit</MudButton>
+            <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error" Size="Size.Small">Delete</MudButton>
+        </MudTd>
     </RowTemplate>
     <PagerContent>
-        <MudTablePager/>
+        <MudTablePager PageSizeOptions="new int[] { 25, 50, 100 }" />
     </PagerContent>
 </MudTable>
 

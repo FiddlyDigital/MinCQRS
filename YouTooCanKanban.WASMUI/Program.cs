@@ -17,7 +17,7 @@ namespace YouTooCanKanban.WASMUI
             builder.Services.AddMudServices();
 
             // Refit Client Services DI Registration.
-            string apiHostAddress = "http://localhost:5208";
+            string apiHostAddress = "https://localhost:44356";
             builder.Services.RegisterAPIClientServices(apiHostAddress);
 
             await builder.Build().RunAsync();
