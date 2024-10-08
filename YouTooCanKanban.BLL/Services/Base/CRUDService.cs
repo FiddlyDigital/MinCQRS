@@ -6,6 +6,7 @@ using YouTooCanKanban.BLL.Mapping;
 using YouTooCanKanban.BLL.Services.Base.Interfaces;
 using YouTooCanKanban.DAL.Entities.Base;
 using YouTooCanKanban.DAL.Repos.Base;
+using YouTooCanKanban.Domain;
 using YouTooCanKanban.Domain.Models.Base;
 
 namespace YouTooCanKanban.BLL.Services.Base
@@ -38,7 +39,7 @@ namespace YouTooCanKanban.BLL.Services.Base
             catch (Exception ex)
             {
                 string errorMessage = $"Error getting list of {typeof(TModel).Name}";
-                Logger.LogError(ex, errorMessage);
+                _logger.LogError(ex, errorMessage);
                 return new Result<IEnumerable<TModel>>(new Exception(errorMessage, ex));
             }
         }
@@ -56,7 +57,7 @@ namespace YouTooCanKanban.BLL.Services.Base
             catch (Exception ex)
             {
                 string errorMessage = $"Error getting the {typeof(TModel).Name} with id {id}";
-                Logger.LogError(ex, errorMessage);
+                _logger.LogError(ex, errorMessage);
                 return new Result<TModel?>(new Exception(errorMessage, ex));
             }
         }
@@ -79,7 +80,7 @@ namespace YouTooCanKanban.BLL.Services.Base
             catch (Exception ex)
             {
                 string errorMessage = $"Error creating {typeof(TModel).Name}";
-                Logger.LogError(ex, errorMessage);
+                _logger.LogError(ex, errorMessage);
                 return new Result<TModel>(new Exception(errorMessage, ex));
             }
         }
@@ -97,7 +98,7 @@ namespace YouTooCanKanban.BLL.Services.Base
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "Error updating {type} with Id of {id}", typeof(TModel).Name, model.Id);
+                _logger.LogError(ex, "Error updating {type} with Id of {id}", typeof(TModel).Name, model.Id);
             }
         }
 
@@ -112,7 +113,7 @@ namespace YouTooCanKanban.BLL.Services.Base
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "Error deleting {type} with Id of {id}", typeof(TModel).Name, id);
+                _logger.LogError(ex, "Error deleting {type} with Id of {id}", typeof(TModel).Name, id);
             }
         }
 

@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace YouTooCanKanban.BLL.Services.Base
+namespace YouTooCanKanban.Domain
 {
     public abstract class BaseService<T> where T : BaseService<T>
     {
-        protected readonly ILogger Logger;
+        protected readonly ILogger _logger;
 
         protected BaseService(ILogger<T> logger)
         {
-            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

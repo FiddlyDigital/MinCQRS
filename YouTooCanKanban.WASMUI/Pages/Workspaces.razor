@@ -3,13 +3,25 @@
 @using YouTooCanKanban.API.Client.Interfaces
 @using YouTooCanKanban.API.Client.Models
 @using YouTooCanKanban.Domain.Models
-@inject IWorkspacesClient workspacesClient
+@using YouTooCanKanban.WASMUI.Services
+@inject IWorkspacesDataService workspacesDataService
 @inject IDialogService DialogService
 
 <PageTitle>Workspaces</PageTitle>
-<h1>Workspaces</h1>
 
 <MudTable Items="@workspaceList" Hover="true" Bordered="true" Striped="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Workspaces</MudText>
+        <MudSpacer />
+        <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Create" Color="Color.Primary" Size="Size.Small"
+                   OnClick="()=>{ CreateEditWorkspace(-1); }">Create</MudButton>
+    </ToolBarContent>
+    <ColGroup>
+        <col style="width: 60px;" />
+        <col />
+        <col style="width: 60px;" />
+        <col style="width: 180px;" />
+    </ColGroup>
     <HeaderContent>
         <MudTh>Id</MudTh>
         <MudTh>Name</MudTh>
@@ -20,9 +32,13 @@
         <MudTd DataLabel="Id">@context.Id</MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="No.Boards">@context.Boards?.Count</MudTd>
-        <MudTd DataLabel="Actions">
-            <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Edit" Color="Color.Primary" Size="Size.Small">Edit</MudButton>
-            <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error" Size="Size.Small">Delete</MudButton>
+        <MudTd DataLabel="Actions" Style="text-align:center">
+            <MudButton Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" OnClick="()=>{ CreateEditWorkspace(context.Id); }">
+                <MudIcon Icon="@Icons.Material.Filled.Edit" Size="Size.Small" />
+            </MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" OnClick="()=>{ DeleteWorkspace(context.Id); }">
+                <MudIcon Icon="@Icons.Material.Filled.Delete" Size="Size.Small" />
+            </MudButton>
         </MudTd>
     </RowTemplate>
     <PagerContent>
@@ -32,7 +48,7 @@
 
 @code {
     private bool _loading;
-    private IEnumerable<WorkspaceModel> workspaceList = new List<WorkspaceModel>();
+    private IEnumerable<WorkspaceModel>? workspaceList = new List<WorkspaceModel>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,11 +56,11 @@
 
         try
         {
-            workspaceList = await workspacesClient.GetList(
+            workspaceList = await workspacesDataService.GetList(
                 new GetListParams() { Page = 1, PageSize = 25 }
             );
         }
-        catch(Exception exc)
+        catch (Exception exc)
         {
             await DialogService.ShowMessageBox(
                 "Error",
@@ -57,4 +73,15 @@
         }
     }
 
+    private void CreateEditWorkspace(int workspaceId)
+    {
+        // open the dialog with this id - it will perform GetByID Interally
+
+        // if the
+    }
+
+    private void DeleteWorkspace(int workspaceId)
+    {
+
+    }
 }

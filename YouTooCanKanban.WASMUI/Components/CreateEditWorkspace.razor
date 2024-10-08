@@ -1,0 +1,32 @@
+﻿@using YouTooCanKanban.Domain.Models
+<h3>CreateEditWorkspace</h3>
+
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Name" @bind-Value="model.Name" For="@(() => model.Name)" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Create</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12">
+            <MudText Typo="Typo.body2" Align="Align.Center">
+                Fill out the form correctly to see the success message.
+            </MudText>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+@code {
+    WorkspaceModel model = new WorkspaceModel() { Name = "" };
+
+    private void OnValidSubmit(EditContext context)
+    {
+        StateHasChanged();
+    }
+}
