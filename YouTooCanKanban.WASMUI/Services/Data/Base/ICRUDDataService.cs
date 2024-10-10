@@ -1,6 +1,6 @@
 ﻿using YouTooCanKanban.API.Client.Models;
 
-namespace YouTooCanKanban.WASMUI.Services.Base
+namespace YouTooCanKanban.WASMUI.Services.Data.Base
 {
     public interface ICRUDDataService<TModel>
     {

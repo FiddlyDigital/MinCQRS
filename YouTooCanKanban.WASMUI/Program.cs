@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using YouTooCanKanban.API.Client.Extensions;
+using YouTooCanKanban.WASMUI.Handlers;
 using YouTooCanKanban.WASMUI.Services;
+using YouTooCanKanban.WASMUI.Services.Data;
 
 namespace YouTooCanKanban.WASMUI
 {
@@ -14,8 +16,12 @@ namespace YouTooCanKanban.WASMUI
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            // MudBlazor UI
+            // MudBlazor UI Components
             builder.Services.AddMudServices();
+
+            // Auth-related Services
+            builder.Services.AddTransient<ITokenStorageService, TokenStorageService>();
+            builder.Services.AddTransient<ApiAuthHeaderHandler>();
 
             // Refit Client Services DI Registration.
             string apiHostAddress = "https://localhost:44356";
@@ -29,6 +35,6 @@ namespace YouTooCanKanban.WASMUI
             builder.Services.AddTransient<IWorkspacesDataService, WorkspacesDataService>();
 
             await builder.Build().RunAsync();
-        }
+        }        
     }
 }

@@ -3,7 +3,7 @@ using YouTooCanKanban.API.Client.Models;
 using YouTooCanKanban.Domain;
 using YouTooCanKanban.Domain.Models.Base;
 
-namespace YouTooCanKanban.WASMUI.Services.Base
+namespace YouTooCanKanban.WASMUI.Services.Data.Base
 {
     public abstract class CRUDDataService<TService, TAPIClient, TModel> : BaseService<TService>, ICRUDDataService<TModel>
         where TService : CRUDDataService<TService, TAPIClient, TModel>

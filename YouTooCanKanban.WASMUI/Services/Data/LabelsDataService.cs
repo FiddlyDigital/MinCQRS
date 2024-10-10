@@ -1,8 +1,8 @@
 ﻿using YouTooCanKanban.API.Client.Interfaces;
 using YouTooCanKanban.Domain.Models;
-using YouTooCanKanban.WASMUI.Services.Base;
+using YouTooCanKanban.WASMUI.Services.Data.Base;
 
-namespace YouTooCanKanban.WASMUI.Services
+namespace YouTooCanKanban.WASMUI.Services.Data
 {
     public interface ILabelsDataService : ICRUDDataService<LabelModel> { }
 
