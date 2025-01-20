@@ -26,7 +26,14 @@ namespace YouTooCanKanban.API.Endpoints.Base
             EndpointRoute = endpoint;
         }
 
-        private async Task<IResult> GetListAsync(ISender mediator, int page = 1, int pageSize = 25, string? sortBy = null, string? sortDir = null, string? filter = null)
+        private async Task<IResult> GetListAsync(
+            ISender mediator,
+            int page = 1,
+            int pageSize = 25,
+            string? sortBy = null,
+            string? sortDir = null,
+            string? filter = null
+        )
         {
             if (page < 1)
             {
@@ -34,7 +41,7 @@ namespace YouTooCanKanban.API.Endpoints.Base
             }
 
             if (pageSize < 1)
-            { 
+            {
                 return Results.BadRequest("B");
             }
 
@@ -63,7 +70,8 @@ namespace YouTooCanKanban.API.Endpoints.Base
                     [FromQuery(Name = "sortBy")] string? sortBy,
                     [FromQuery(Name = "sortDir")] string? sortDir,
                     [FromQuery(Name = "filter")] string? filter
-                ) => GetListAsync(mediator, page, pageSize, sortBy, sortDir, filter))
+                ) =>
+                GetListAsync(mediator, page, pageSize, sortBy, sortDir, filter))
                 .WithOpenApi(operation => new(operation)
                 {
                     Summary = "Requests a list of " + EndpointRoute,

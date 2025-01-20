@@ -3,6 +3,7 @@
 @using YouTooCanKanban.API.Client.Interfaces
 @using YouTooCanKanban.API.Client.Models
 @using YouTooCanKanban.Domain.Models
+@using YouTooCanKanban.WASMUI.Components
 @using YouTooCanKanban.WASMUI.Services;
 @using YouTooCanKanban.WASMUI.Services.Data
 @inject IWorkspacesDataService workspacesDataService
@@ -14,8 +15,9 @@
     <ToolBarContent>
         <MudText Typo="Typo.h6">Workspaces</MudText>
         <MudSpacer />
-        <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Create" Color="Color.Primary" Size="Size.Small"
-                   OnClick="()=>{ CreateEditWorkspace(-1); }">Create</MudButton>
+        <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Create"
+            Color="Color.Primary" Size="Size.Small"
+            OnClick="()=>{ CreateEditWorkspace(-1); }">Create</MudButton>
     </ToolBarContent>
     <ColGroup>
         <col style="width: 60px;" />
@@ -74,11 +76,16 @@
         }
     }
 
-    private void CreateEditWorkspace(int workspaceId)
+    private Task CreateEditWorkspace(int workspaceId)
     {
         // open the dialog with this id - it will perform GetByID Interally
 
         // if the
+        var options = new DialogOptions { 
+            CloseOnEscapeKey = true 
+        };
+
+        return DialogService.ShowAsync<CreateEditWorkspace>("Edit Workspace", options);
     }
 
     private void DeleteWorkspace(int workspaceId)
